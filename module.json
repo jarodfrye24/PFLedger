@@ -9,6 +9,15 @@
     ],
     "version": "1",
     "minimumCoreVersion": "0.80.2",
+    "compatibleCoreVersion": "9.238",
+    "scripts": [],
+    "esmodules": [],
+    "styles": [],
+    "languages": [],
+    "packs": [],
+    "system": [
+        "pf1e"
+    ],
     "dependencies": [],
     "socket": false,
     "manifest": "https://github.com/Almightygir/PFLedger/raw/main/module.json",
