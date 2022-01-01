@@ -2,7 +2,7 @@ console.log('Ledger ! Im running!');
 
 class Ledger
 {
-    static ID = 'ledger';
+    static ID = 'PFLedger';
     static FLAGS = { LEDGERS: 'ledgers' }
 
     static TEMPLATES = { LEDGERLIST: 'modules/${this.ID}/templates/ledgers.hbs' }
