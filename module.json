@@ -1,0 +1,12 @@
+{
+    "name": "PFLedger",
+    "title": "Pathfinder Ledger",
+    "description": "A simple module which records money in and out.",
+    "authors": [
+      {
+        name: "Lee 'Almighty_gir' Devonald"
+      }
+    ],
+    "version": "1",
+    "minimumCoreVersion": "0.80.2"
+  }
