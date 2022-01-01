@@ -12,7 +12,7 @@
     "dependencies": [],
     "socket": false,
     "manifest": "https://github.com/Almightygir/PFLedger/raw/main/module.json",
-    "download": "https://github.com/Almightygir/PFLedger/archive/main.zip",
+    "download": "https://github.com/Almightygir/PFLedger/archive/refs/heads/main.zip",
     "protected": false,
     "coreTranslation": false,
     "library": false
