@@ -49,4 +49,24 @@ class LedgerData
 
         return game.users.get(userId)?.setFlag(Ledger.ID, Ledger.FLAGS.LEDGERS, newEntries);
     }
+
+    static getUserTotals(userId)
+    {
+        ledgers = this.getLedgerForUser(userId);
+        pp = 0;
+        GP = 0;
+        SP = 0;
+        CP = 0;
+        foreach(l in ledgers)
+        {
+            PP += l.PP;
+            GP += l.GP;
+            SP += l.SP;
+            CP += l.CP;
+        }
+
+        charName = game.users.current.charname;
+
+        return '(charName) has PP:' + PP + ' GP:' + GP + ' SP:' + SP + ' CP:' + CP;
+    }
 }
