@@ -30,15 +30,16 @@ class LedgerData
     }
 
     //creates a new entry for the ledger
-    static addLedgerEntry(userId, updateData)
+    static addLedgerEntry(userId, inLedgerLog, inPP, inGP, inSP, inCP)
     {
         //generate new random id for this ledger entry and populate the userID
         const newLedgerEntry =
         {
-            PP: 0,
-            GP: 0,
-            SP: 0,
-            CP: 0,
+            ledgerLog: inLedgerLog,
+            PP: inPP,
+            GP: inGP,
+            SP: inSP,
+            CP: inCP,
             id: foundry.utils.randomID(16),
             userId,
         }
