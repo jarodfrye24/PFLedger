@@ -1,5 +1,6 @@
 console.log('Ledger ! Im running!');
 
+//Main class
 class Ledger
 {
     static ID = 'PFLedger';
