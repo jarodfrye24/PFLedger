@@ -50,22 +50,34 @@ class LedgerData
         return game.users.get(userId)?.setFlag(Ledger.ID, Ledger.FLAGS.LEDGERS, newEntries);
     }
 
+    static get allLedgerEntries()
+    {
+        const allLedgers = game.users.reduce((accumulator, user) => 
+        {
+            const userLedgerEntries = this.getLedgerForUser(user.id);
+            return{ ...accumulator, ...userLedgerEntries }
+        }, {});
+
+        return allLedgers;
+    }
+
     static getUserTotals(userId)
     {
-        ledgers = this.getLedgerForUser(userId);
-        pp = 0;
-        GP = 0;
-        SP = 0;
-        CP = 0;
-        foreach(l in ledgers)
+        const ledgerEntries = this.allLedgerEntries();
+        var PP = 0;
+        var GP = 0;
+        var SP = 0;
+        var CP = 0;
+
+        for(let index = 0; index < ledgerEntries.length; ++index)
         {
-            PP += l.PP;
-            GP += l.GP;
-            SP += l.SP;
-            CP += l.CP;
+            PP += ledgerEntries[index].PP;
+            GP += ledgerEntries[index].GP;
+            SP += ledgerEntries[index].SP;
+            CP += ledgerEntries[index].CP;
         }
 
-        charName = game.users.current.charname;
+        charName = game.users.current.data.name;
 
         return '(charName) has PP:' + PP + ' GP:' + GP + ' SP:' + SP + ' CP:' + CP;
     }
