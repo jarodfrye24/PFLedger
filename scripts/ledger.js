@@ -88,18 +88,65 @@ class CashConverter
     }
 }
 
-function updateItemEvent(item, _update, _options, userId)
+function harvestData(oldD, newD, origin = {})
 {
-	if (game.user.id !== userId) // Only triggering user should handle things from here on out for simplicity
+	const ud = {};
+
+	if (!isObjectEmpty(origin)) oldD = mergeObject(origin, oldD, mergeOpts);
+	{
+        if (newD === undefined || oldD === undefined)
+        {
+            return ud;
+        }
+	    newD = duplicate(newD ?? {}), oldD = duplicate(oldD ?? {}); // prevent corrupting original data
+    }
+
+	const currency =
+    {
+		base: newD?.currency ?? {},
+		alt: newD?.altCurrency ?? {},
+		delta: duplicate(baseC),
+	};
+
+	const oldCurrency =
+    {
+		base: oldD?.currency ?? {},
+		alt: oldD?.altCurrency ?? {},
+	}
+
+	for (let type of Object.keys(oldCurrency))
+    {
+		for (let c of currencyTypes)
+        {
+			if (currency[type][c] !== undefined)
+            {
+                currency.delta[c] = currency[type][c] - (oldCurrency[type][c] ?? 0);
+            }
+		}
+	}
+
+	return currency;
+}
+
+function updateActorEvent(actor, _update, _options, userId)
+{
+	if (game.user.id !== userId) // Only triggering user should handle things for simplicity
     {
         return;
     }
+	// const ud = actor._tempAccountingMonitor;
+	// if (ud == undefined) return;
+	// delete actor._tempAccountingMonitor;
+
+	// finalizeTransaction(actor, null, ud);
 }
 
-Hooks.on('updateItem', updateItemEvent);
 
-// Hooks.on('renderActorSheetPF', (actorSheet, html) => {
-//     const user = game.users.get(game.userId);
-//     const sheetCP = CashConverter.convertToCP(user.data.currency);
-//     console.log(sheetCP);
-// });
+Hooks.on('updateActor', updateActorEvent);
+
+Hooks.on('renderActorSheetPF', (actorSheet, html) => {
+    const actorDoc = actorSheet.document;
+    const user = game.users.get(game.userId);
+    const sheetCP = CashConverter.convertToCP(user.data.currency);
+    console.log(sheetCP);
+});
