@@ -88,7 +88,18 @@ class CashConverter
     }
 }
 
-Hooks.on('renderActorSheetPF', (actorSheet, html) => {
-    const sheetCP = CashConverter.convertToCP(game.users.get(userId).data.currency);
-    console.log(sheetCP);
-});
+function updateItemEvent(item, _update, _options, userId)
+{
+	if (game.user.id !== userId) // Only triggering user should handle things from here on out for simplicity
+    {
+        return;
+    }
+}
+
+Hooks.on('updateItem', updateItemEvent);
+
+// Hooks.on('renderActorSheetPF', (actorSheet, html) => {
+//     const user = game.users.get(game.userId);
+//     const sheetCP = CashConverter.convertToCP(user.data.currency);
+//     console.log(sheetCP);
+// });
