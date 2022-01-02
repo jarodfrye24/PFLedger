@@ -152,19 +152,27 @@ function preUpdateActorEvent(actor, _update, _options, userId)
     }
 }
 
-function addLedgerUpdateButton(actorSheet, html)
+function addLedgerButtons(sheet, jq, data)
 {
+    const html = jq[0];
+
+	const   item = data.item,
+            itemId = item.id,
+            type = item.type,
+            actor = data.item.parent,
+            actorId = actor?.id;
+
+	if (!actor)
+    {
+        return;
+    }
+	if (type !== 'feat')
+    {
+        return; // Do only for feats
+    }
 
 }
 
-function addLedgerOpenButton(actorSheet, html)
-{
-    
-}
+//Hooks.on('preUpdateActor', preUpdateActorEvent);
 
-Hooks.on('preUpdateActor', preUpdateActorEvent);
-
-Hooks.on('renderActorSheetPF', (actorSheet, html) => {
-    addLedgerUpdateButton(actorSheet, html);
-    addLedgerOpenButton(actorSheet, html);
-  });
+Hooks.on('renderActorSheetPF', addLedgerButtons);
