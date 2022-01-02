@@ -75,7 +75,20 @@ class LedgerData
     }
 }
 
-Hooks.on('renderActorSheet', (actorSheet, html) => {
-    const currency = html.find('[data-currency="${game.userId}"]')
-    console.log(currency);
+class CashConverter
+{
+    static convertToCP(currency)
+    {
+        var CP = currency.CP;
+        CP += currency.SP * 10;
+        CP += currency.GP * 100;
+        CP += currency.PP * 1000;
+
+        return CP;
+    }
+}
+
+Hooks.on('renderActorSheetPF', (actorSheet, html) => {
+    const sheetCP = CashConverter.convertToCP(game.users.get(userId).data.currency);
+    console.log(sheetCP);
 });
