@@ -79,53 +79,13 @@ class CashConverter
 {
     static convertToCP(currency)
     {
-        var CP = currency.CP;
-        CP += currency.SP * 10;
-        CP += currency.GP * 100;
-        CP += currency.PP * 1000;
+        var CP = currency.cp;
+        CP += currency.sp * 10;
+        CP += currency.gp * 100;
+        CP += currency.pp * 1000;
 
         return CP;
     }
-}
-
-function harvestData(oldD, newD, origin = {})
-{
-	const ud = {};
-
-	if (!isObjectEmpty(origin)) oldD = mergeObject(origin, oldD, mergeOpts);
-	{
-        if (newD === undefined || oldD === undefined)
-        {
-            return ud;
-        }
-	    newD = duplicate(newD ?? {}), oldD = duplicate(oldD ?? {}); // prevent corrupting original data
-    }
-
-	const currency =
-    {
-		base: newD?.currency ?? {},
-		alt: newD?.altCurrency ?? {},
-		delta: duplicate(baseC),
-	};
-
-	const oldCurrency =
-    {
-		base: oldD?.currency ?? {},
-		alt: oldD?.altCurrency ?? {},
-	}
-
-	for (let type of Object.keys(oldCurrency))
-    {
-		for (let c of currencyTypes)
-        {
-			if (currency[type][c] !== undefined)
-            {
-                currency.delta[c] = currency[type][c] - (oldCurrency[type][c] ?? 0);
-            }
-		}
-	}
-
-	return currency;
 }
 
 function updateActorEvent(actor, _update, _options, userId)
@@ -134,19 +94,15 @@ function updateActorEvent(actor, _update, _options, userId)
     {
         return;
     }
-	// const ud = actor._tempAccountingMonitor;
-	// if (ud == undefined) return;
-	// delete actor._tempAccountingMonitor;
 
-	// finalizeTransaction(actor, null, ud);
+    const altCurrency = actor.data.data.altCurrency;
+    const currency = actor.data.data.currency;
+
+    const altCurrencyToCP = CashConverter.convertToCP(altCurrency);
+    const currencyToCP = CashConverter.convertToCP(currency);
+
+    console.log('Ledger ! Currency: ' + currencyToCP);
+    console.log('Ledger ! WeightlessCurrency: ' + altCurrencyToCP);
 }
 
-
 Hooks.on('updateActor', updateActorEvent);
-
-Hooks.on('renderActorSheetPF', (actorSheet, html) => {
-    const actorDoc = actorSheet.document;
-    const user = game.users.get(game.userId);
-    const sheetCP = CashConverter.convertToCP(user.data.currency);
-    console.log(sheetCP);
-});
