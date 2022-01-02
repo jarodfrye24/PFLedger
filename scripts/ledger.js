@@ -74,3 +74,8 @@ class LedgerData
         return charName + ' has PP:' + PP + ' GP:' + GP + ' SP:' + SP + ' CP:' + CP;
     }
 }
+
+Hooks.on('renderActorSheet', (actorSheet, html) => {
+    const currency = html.find('[data-currency="${game.userId}"]')
+    console.log(currency);
+});
