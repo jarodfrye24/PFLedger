@@ -154,23 +154,33 @@ function preUpdateActorEvent(actor, _update, _options, userId)
 
 function addLedgerButtons(sheet, jq, data)
 {
-    const html = jq[0];
-
-	const   item = data.item,
-            itemId = item.id,
-            type = item.type,
-            actor = data.item.parent,
-            actorId = actor?.id;
-
-	if (!actor)
+    const actor = data.actor;
+    if (!actor)
     {
         return;
     }
-	if (type !== 'feat')
+
+    const html = jq[0];
+	const tab = html.querySelector('.tab.inventory');
+	if (!tab)
     {
-        return; // Do only for feats
+        return;
     }
 
+    const currencyTab = tab.querySelector('.inventory-filters');
+    if (!currencyTab)
+    {
+        return;
+    }
+
+    const tooltip = 'Add ledger entry';
+    currencyTab.append(`<button type='button' class='pfledger-button' title='${tooltip}'><i class='fas fa-tasks'></i></button>`);
+
+	
+        // itemId = item.id,
+        // 
+        // actor = data.item.parent,
+        // actorId = actor?.id;
 }
 
 //Hooks.on('preUpdateActor', preUpdateActorEvent);

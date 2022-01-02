@@ -1,0 +1,11 @@
+.pf1.sheet .pfledger-button button
+{
+    font-size: 10px;
+    line-height: 12px;
+    margin: 0;
+}
+
+.pf1.sheet .pfledger-button span 
+{
+    padding:0;
+}
