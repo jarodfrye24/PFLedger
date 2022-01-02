@@ -42,6 +42,7 @@ class LedgerData
             SP: inSP,
             CP: inCP,
             id: foundry.utils.randomID(16),
+            character: game.users.get(userId).data.name,
             userId,
         }
 
@@ -53,6 +54,7 @@ class LedgerData
     static getUserTotals(userId)
     {
         const ledgerEntries = this.getLedgerForUser(userId);
+        const charName = game.users.get(userId).data.name;
         var PP = 0;
         var GP = 0;
         var SP = 0;
@@ -60,13 +62,14 @@ class LedgerData
 
         for(const ledgerEntry of Object.values(ledgerEntries))
         {
-            PP += ledgerEntry.PP;
-            GP += ledgerEntry.GP;
-            SP += ledgerEntry.SP;
-            CP += ledgerEntry.CP;
+            if(charName === ledgerEntries.character)
+            {
+                PP += ledgerEntry.PP;
+                GP += ledgerEntry.GP;
+                SP += ledgerEntry.SP;
+                CP += ledgerEntry.CP;
+            }
         }
-
-        const charName = game.users.get(userId).data.name;
 
         return charName + ' has PP:' + PP + ' GP:' + GP + ' SP:' + SP + ' CP:' + CP;
     }
