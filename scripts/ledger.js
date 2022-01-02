@@ -31,9 +31,11 @@ class LedgerData
     }
 
     //creates a new entry for the ledger
-    static addLedgerEntry(userId, inLedgerLog, inPP, inGP, inSP, inCP)
+    static addLedgerEntry(actor, userId, inLedgerLog, inPP, inGP, inSP, inCP)
     {
         //generate new random id for this ledger entry and populate the userID
+        const name = actor === null ? game.users.get(userId).data.name : actor.data.name;
+
         const newLedgerEntry =
         {
             ledgerLog: inLedgerLog,
@@ -42,7 +44,7 @@ class LedgerData
             SP: inSP,
             CP: inCP,
             id: foundry.utils.randomID(16),
-            character: game.users.get(userId).data.name,
+            character: name,
             userId,
         }
 
