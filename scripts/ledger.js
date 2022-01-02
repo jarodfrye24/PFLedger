@@ -37,13 +37,14 @@ class LedgerData
         const newLedgerEntry =
         {
             ledgerLog: inLedgerLog,
-            altCurrency: actor.data.altCurrency,
-            currency: actor.data.currency,
+            altCurrency: actor.data.data.altCurrency,
+            currency: actor.data.data.currency,
             id: foundry.utils.randomID(16),
             character: actor.data.name,
             actor,
             userId,
         }
+
 
         const newEntries = { [newLedgerEntry.id]: newLedgerEntry }
 
@@ -56,7 +57,7 @@ class LedgerData
         var actorEntries = new Array();
         for(const ledgerEntry of Object.values(ledgerEntries))
         {
-            if(ledgerEntry !== null)
+            if(ledgerEntry && ledgerEntry.actor)
             {
                 if(ledgerEntry.actor === actor)
                 {
@@ -95,7 +96,7 @@ class CashConverter
     }
 }
 
-function updateActorEvent(actor, _update, _options, userId)
+function preUpdateActorEvent(actor, _update, _options, userId)
 {
     // Only triggering user should handle things for simplicity
 	if (game.user.id !== userId) 
@@ -131,4 +132,14 @@ function updateActorEvent(actor, _update, _options, userId)
     }
 }
 
-Hooks.on('updateActor', updateActorEvent);
+Hooks.on('preUpdateActor', preUpdateActorEvent);
+
+Hooks.on('renderPlayerList', (playerList, html) => {
+    // find the element which has our logged in user's id
+    const loggedInUserListItem = html.find(`[data-user-id="${game.userId}"]`)
+    
+    // insert a button at the end of this element
+    loggedInUserListItem.append(
+      "<button type='button' class='todo-list-icon-button'><i class='fas fa-tasks'></i></button>"
+    );
+  });
