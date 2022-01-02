@@ -31,20 +31,17 @@ class LedgerData
     }
 
     //creates a new entry for the ledger
-    static addLedgerEntry(actor, userId, inLedgerLog, inPP, inGP, inSP, inCP)
+    static addLedgerEntry(actor, userId, inLedgerLog)
     {
         //generate new random id for this ledger entry and populate the userID
-        const name = actor === null ? game.users.get(userId).data.name : actor.data.name;
-
         const newLedgerEntry =
         {
             ledgerLog: inLedgerLog,
-            PP: inPP,
-            GP: inGP,
-            SP: inSP,
-            CP: inCP,
+            altCurrency: actor.data.altCurrency,
+            currency: actor.data.currency,
             id: foundry.utils.randomID(16),
-            character: name,
+            character: actor.data.name,
+            actor,
             userId,
         }
 
@@ -53,33 +50,31 @@ class LedgerData
         return game.users.get(userId)?.setFlag(Ledger.ID, Ledger.FLAGS.LEDGERS, newEntries);
     }
 
-    static getUserTotals(userId)
+    static getActorLedgerLastEntry(actor, userId)
     {
         const ledgerEntries = this.getLedgerForUser(userId);
-        const charName = game.users.get(userId).data.name;
-        var PP = 0;
-        var GP = 0;
-        var SP = 0;
-        var CP = 0;
-
+        var actorEntries = new Array();
         for(const ledgerEntry of Object.values(ledgerEntries))
         {
-            if(charName === ledgerEntries.character)
+            if(ledgerEntry !== null)
             {
-                PP += ledgerEntry.PP;
-                GP += ledgerEntry.GP;
-                SP += ledgerEntry.SP;
-                CP += ledgerEntry.CP;
+                if(ledgerEntry.actor === actor)
+                {
+                    actorEntries.push(ledgerEntry);
+                }
             }
         }
-
-        return charName + ' has PP:' + PP + ' GP:' + GP + ' SP:' + SP + ' CP:' + CP;
+        if(actorEntries.length > 0)
+        {
+            return actorEntries[actorEntries.length-1];
+        }
+        return null;
     }
 }
 
 class CashConverter
 {
-    static convertToCP(currency)
+    static convertCurrencyToCP(currency)
     {
         var CP = currency.cp;
         CP += currency.sp * 10;
@@ -88,23 +83,52 @@ class CashConverter
 
         return CP;
     }
+    
+    static convertToCP(inCP, inSP, inGP, inPP)
+    {
+        var CP = inCP;
+        CP += inSP * 10;
+        CP += inGP * 100;
+        CP += inPP * 1000;
+
+        return CP;
+    }
 }
 
 function updateActorEvent(actor, _update, _options, userId)
 {
-	if (game.user.id !== userId) // Only triggering user should handle things for simplicity
+    // Only triggering user should handle things for simplicity
+	if (game.user.id !== userId) 
     {
         return;
     }
 
-    const altCurrency = actor.data.data.altCurrency;
-    const currency = actor.data.data.currency;
+    //if for any reason actor is null, return early.
+    if(actor === null)
+    {
+        console.log('Ledger ! Actor is null, exiting early');
+        return;
+    }
 
-    const altCurrencyToCP = CashConverter.convertToCP(altCurrency);
-    const currencyToCP = CashConverter.convertToCP(currency);
+    const lastEntry = LedgerData.getActorLedgerLastEntry(actor, userID);
+    //if the last entry is null, it doesn't exist, so we should make a new entry.
+    if(lastEntry === null)
+    {
+        console.log('Ledger ! No last entry found, creating new entry');
+        LedgerData.addLedgerEntry(actor, userId, "Initial entry.");
+    }
+    else
+    {
+        const altCurrency = actor.data.data.altCurrency;
+        const currency = actor.data.data.currency;
 
-    console.log('Ledger ! Currency: ' + currencyToCP);
-    console.log('Ledger ! WeightlessCurrency: ' + altCurrencyToCP);
+        //check if there's a delta, if there is we need to create an entry.
+        if((altCurrency !== lastEntry.altCurrency) || (currency !== lastEntry.currency))
+        {
+            console.log('Ledger ! Changes detected, adding a new entry!');
+            LedgerData.addLedgerEntry(actor, userId, "");
+        }
+    }
 }
 
 Hooks.on('updateActor', updateActorEvent);
