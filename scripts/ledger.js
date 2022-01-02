@@ -71,6 +71,16 @@ class LedgerData
         }
         return null;
     }
+
+    static deleteAllLedgerEntries()
+    {
+        const ledgerEntries = this.getLedgerForUser(userId);
+        for(const ledgerEntry of Object.values(ledgerEntries))
+        {
+            const ledgerEntryID = ledgerEntry.id;
+            const keyDeletion = { ['-=${ledgerEntryID}']: null }
+        }
+    }
 }
 
 class CashConverter
@@ -111,7 +121,7 @@ function preUpdateActorEvent(actor, _update, _options, userId)
         return;
     }
 
-    const lastEntry = LedgerData.getActorLedgerLastEntry(actor, userID);
+    const lastEntry = LedgerData.getActorLedgerLastEntry(actor, userId);
     //if the last entry is null, it doesn't exist, so we should make a new entry.
     if(lastEntry === null)
     {
@@ -132,14 +142,19 @@ function preUpdateActorEvent(actor, _update, _options, userId)
     }
 }
 
+function addLedgerUpdateButton(actorSheet, html)
+{
+
+}
+
+function addLedgerOpenButton(actorSheet, html)
+{
+    
+}
+
 Hooks.on('preUpdateActor', preUpdateActorEvent);
 
-Hooks.on('renderPlayerList', (playerList, html) => {
-    // find the element which has our logged in user's id
-    const loggedInUserListItem = html.find(`[data-user-id="${game.userId}"]`)
-    
-    // insert a button at the end of this element
-    loggedInUserListItem.append(
-      "<button type='button' class='todo-list-icon-button'><i class='fas fa-tasks'></i></button>"
-    );
+Hooks.on('renderActorSheetPF', (actorSheet, html) => {
+    addLedgerUpdateButton(actorSheet, html);
+    addLedgerOpenButton(actorSheet, html);
   });
