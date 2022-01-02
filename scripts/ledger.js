@@ -72,14 +72,21 @@ class LedgerData
         return null;
     }
 
-    static deleteAllLedgerEntries()
+    static deleteLedgerEntriesForUser(user)
     {
-        const ledgerEntries = this.getLedgerForUser(userId);
+        const currentID = user.data._id;
+        const ledgerEntries = this.getLedgerForUser(currentID);
         for(const ledgerEntry of Object.values(ledgerEntries))
         {
             const ledgerEntryID = ledgerEntry.id;
             const keyDeletion = { ['-=${ledgerEntryID}']: null }
+            game.users.get(game.userId)?.setFlag(ToDoList.ID, ToDoList.FLAGS.TODOS, keyDeletion);
         }
+    }
+
+    static deleteAllLedgerEntries()
+    {
+        game.users.forEach(deleteLedgerEntriesForUser);
     }
 }
 
