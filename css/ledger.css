@@ -1,13 +1,13 @@
 .pfledger-desc-box
 {
-    width: 200px;
+    width: 457px;
     content: "\f58e";
     font-weight: 900;
     font-family: "Font Awesome 5 Free";
     font-size: 12px;
     font-variant: small-caps;
     color: #4b4a44;
-    margin: 0;t
+    margin: 0;
 }
 
 .pfledger-button
@@ -16,7 +16,7 @@
     line-height: 12px;
     height: auto;
     width: auto;
-    margin 0, 8px;
+    margin: 0, 8px;
     content: "\f58e";
     font-weight: 900;
     font-family: "Font Awesome 5 Free";

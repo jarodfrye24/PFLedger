@@ -25,43 +25,43 @@ class LedgerData
     static get allLegers() {}
 
     //get ledger for a giver nuser
-    static getLedgerForUser(userId)
+    static getLedgerForActor(actor)
     {
-        return game.users.get(userId)?.getFlag(Ledger.ID, Ledger.FLAGS.LEDGERS);
+        return actor.getFlag(Ledger.ID, Ledger.FLAGS.LEDGERS);
     }
 
     //creates a new entry for the ledger
     static addLedgerEntry(actor, userId, inLedgerLog)
     {
         //generate new random id for this ledger entry and populate the userID
+        const actorId = actor.id;
         const newLedgerEntry =
         {
             ledgerLog: inLedgerLog,
             altCurrency: actor.data.data.altCurrency,
             currency: actor.data.data.currency,
             id: foundry.utils.randomID(16),
-            character: actor.data.name,
-            actor,
-            userId,
+            character: actor.name,
+            actorId: actorId,
+            userId: userId,
         }
-
 
         const newEntries = { [newLedgerEntry.id]: newLedgerEntry }
 
-        return game.users.get(userId)?.setFlag(Ledger.ID, Ledger.FLAGS.LEDGERS, newEntries);
+        return game.actors.get(actorId)?.setFlag(Ledger.ID, Ledger.FLAGS.LEDGERS, newEntries);
     }
 
-    static getActorLedgerLastEntry(actor, userId)
+    static getActorLedgerLastEntry(actor)
     {
-        const ledgerEntries = this.getLedgerForUser(userId);
+        const ledgerEntries = this.getLedgerForActor(actor);
         if(ledgerEntries)
         {
             var actorEntries = new Array();
             for(const ledgerEntry of Object.values(ledgerEntries))
             {
-                if(ledgerEntry && ledgerEntry.actor)
+                if(ledgerEntry)
                 {
-                    if(ledgerEntry.actor === actor)
+                    if(ledgerEntry.actorId === actor.data._id)
                     {
                         actorEntries.push(ledgerEntry);
                     }
@@ -73,26 +73,6 @@ class LedgerData
             }
         }
         return null;
-    }
-
-    static deleteLedgerEntry(ledgerEntry)
-    {
-        const ledgerEntryID = ledgerEntry.id;
-        const keyDeletion = { ['-=${ledgerEntryID}']: null }
-        return game.users.get(currentID)?.setFlag(Ledger.ID, Ledger.FLAGS.LEDGERS, keyDeletion);
-    }
-
-    static deleteAllLedgerEntries()
-    {
-        for(const [key, value] of game.users.entries())
-        {
-            const currentID = key;
-            const ledgerEntries = this.getLedgerForUser(currentID);
-            for(const ledgerEntry of Object.values(ledgerEntries))
-            {
-                deleteLedgerEntry(ledgerEntry);
-            }
-        }
     }
 }
 
@@ -116,6 +96,14 @@ class CashConverter
         CP += inPP * 1000;
 
         return CP;
+    }
+
+    static currencyCheck(inCurrencyA, inCurrencyB)
+    {
+        return inCurrencyA.cp == inCurrencyB.cp &&
+        inCurrencyA.sp == inCurrencyB.sp &&
+        inCurrencyA.gp == inCurrencyB.gp &&
+        inCurrencyA.pp == inCurrencyB.pp;
     }
 }
 
@@ -142,7 +130,7 @@ function addLedgerEntry_Ext(actor, description)
         const currency = actor.data.data.currency;
 
         //check if there's a delta, if there is we need to create an entry.
-        if((altCurrency !== lastEntry.altCurrency) || (currency !== lastEntry.currency))
+        if(!CashConverter.currencyCheck(altCurrency, lastEntry.altCurrency) || !CashConverter.currencyCheck(currency, lastEntry.currency))
         {
             console.log('Ledger ! Changes detected, adding a new entry!');
             LedgerData.addLedgerEntry(actor, userId, description);
@@ -199,7 +187,5 @@ function addLedgerButtons(sheet, jq, data)
     openLedgerButton.title = openLedgerTooltip;
     currencyTab.append(openLedgerButton);
 }
-
-//Hooks.on('preUpdateActor', preUpdateActorEvent);
 
 Hooks.on('renderActorSheetPF', addLedgerButtons);
