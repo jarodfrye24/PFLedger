@@ -1,28 +1,77 @@
+.pfledger-row-currency
+{
+  width: 50px;
+  content: "\f58e";
+  font-weight: 900;
+  font-family: "Font Awesome 5 Free";
+  font-size: 12px;
+  font-variant: small-caps;
+  color: #4b4a44;
+  margin: 0;
+}
+
+.pfledger-row-user
+{
+  width: 50px;
+  content: "\f58e";
+  font-weight: 900;
+  font-family: "Font Awesome 5 Free";
+  font-size: 12px;
+  font-variant: small-caps;
+  color: #4b4a44;
+  margin: 0;
+}
+
+.pfledger-row-character
+{
+  width: 50px;
+  content: "\f58e";
+  font-weight: 900;
+  font-family: "Font Awesome 5 Free";
+  font-size: 12px;
+  font-variant: small-caps;
+  color: #4b4a44;
+  margin: 0;
+}
+
+.pfledger-row-desc
+{
+  width: auto;
+  content: "\f58e";
+  font-weight: 900;
+  font-family: "Font Awesome 5 Free";
+  font-size: 12px;
+  font-variant: small-caps;
+  color: #4b4a44;
+  margin: 0;
+}
+
 .pfledger-desc-box
 {
-    min-width: 457px;
-    content: "\f58e";
-    font-weight: 900;
-    font-family: "Font Awesome 5 Free";
-    font-size: 12px;
-    font-variant: small-caps;
-    color: #4b4a44;
-    margin: 0;
+  min-width: 457px;
+  content: "\f58e";
+  font-weight: 900;
+  font-family: "Font Awesome 5 Free";
+  font-size: 12px;
+  font-variant: small-caps;
+  color: #4b4a44;
+  margin: 0;
 }
 
 .pfledger-button
 {
-    font-size: 12px;
-    line-height: 12px;
-    height: auto;
-    width: auto;
-    margin: 0, 8px;
-    content: "\f58e";
-    font-weight: 900;
-    font-family: "Font Awesome 5 Free";
+  font-size: 12px;
+  line-height: 12px;
+  height: auto;
+  width: auto;
+  margin: 0, 8px;
+  content: "\f58e";
+  font-weight: 900;
+  font-family: "Font Awesome 5 Free";
 }
 
-.pfledger-spacer {
+.pfledger-spacer
+{
   margin: 0 8px;
   flex: 0 0 20px;
 }

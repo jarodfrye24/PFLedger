@@ -1,5 +1,9 @@
 <form>
   <ul>
-    
+    {{#each ledgers}}
+      <li class="flexrow" pfledger-row-desc="{{ledgerLog}}">
+          <textarea type="text" value="{{ledgerLog}}" name="{{ledgerLog}}.label" data-dtype="String" />
+      </li>
+    {{/each}}
   </ul>
 </form>

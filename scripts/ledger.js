@@ -44,7 +44,7 @@ class LedgerData
             id: foundry.utils.randomID(16),
             character: actor.name,
             actorId: actorId,
-            userId: userId,
+            userName: game.users(userId).name,
         }
 
         const newEntries = { [newLedgerEntry.id]: newLedgerEntry }
@@ -132,7 +132,7 @@ class LedgerForm extends FormApplication
 
     static getData()
     {
-        return LedgerData.getLedgerForActor(this.object);
+        return { ledgers: LedgerData.getLedgerForActor(this.object) };
     }
 }
 
