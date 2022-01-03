@@ -1,6 +1,6 @@
 .pfledger-desc-box
 {
-    width: 457px;
+    min-width: 457px;
     content: "\f58e";
     font-weight: 900;
     font-family: "Font Awesome 5 Free";
