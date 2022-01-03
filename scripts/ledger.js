@@ -116,20 +116,15 @@ class CashConverter
     }
 }
 
-function preUpdateActorEvent(actor, _update, _options, userId)
+function addLedgerEntryExt(actor, description)
 {
-    // Only triggering user should handle things for simplicity
-	if (game.user.id !== userId) 
-    {
-        return;
-    }
-
     //if for any reason actor is null, return early.
     if(actor === null)
     {
         console.log('Ledger ! Actor is null, exiting early');
         return;
     }
+    const userId = game.user.id;
 
     const lastEntry = LedgerData.getActorLedgerLastEntry(actor, userId);
     //if the last entry is null, it doesn't exist, so we should make a new entry.
@@ -147,7 +142,7 @@ function preUpdateActorEvent(actor, _update, _options, userId)
         if((altCurrency !== lastEntry.altCurrency) || (currency !== lastEntry.currency))
         {
             console.log('Ledger ! Changes detected, adding a new entry!');
-            LedgerData.addLedgerEntry(actor, userId, "");
+            LedgerData.addLedgerEntry(actor, userId, description);
         }
     }
 }
@@ -173,14 +168,31 @@ function addLedgerButtons(sheet, jq, data)
         return;
     }
 
-    const tooltip = 'Add ledger entry';
-    currencyTab.append(`<button type='button' class='pfledger-button' title='${tooltip}'><i class='fas fa-tasks'></i></button>`);
+    const updateTooltip = 'Add ledger entry';
+    const openLedgerTooltip = 'Opens the ledger';
+    const descBoxTooltip = 'Add ledger entry';
+    
+    const newRow = document.createElement("flexrow");
+    newRow.classList.add("pfledger-spacer");
 
-	
-        // itemId = item.id,
-        // 
-        // actor = data.item.parent,
-        // actorId = actor?.id;
+    const descriptionBox = document.createElement("input");
+    descriptionBox.classList.add("pfledger-desc-box");
+    descriptionBox.setAttribute("value", "...");
+    descriptionBox.title = descBoxTooltip;
+    currencyTab.append(descriptionBox);
+
+    const updateButton = document.createElement("button");
+    updateButton.classList.add("pfledger-button");
+    updateButton.textContent = "Update Ledger";
+    updateButton.title = updateTooltip;
+    updateButton.onClick = "addLedgerEntryExt(actor, descriptionBox.value)"
+    currencyTab.append(updateButton);
+
+    const openLedgerButton = document.createElement("button");
+    openLedgerButton.classList.add("pfledger-button");
+    openLedgerButton.textContent = "Open Ledger...";
+    openLedgerButton.title = openLedgerTooltip;
+    currencyTab.append(openLedgerButton);
 }
 
 //Hooks.on('preUpdateActor', preUpdateActorEvent);
