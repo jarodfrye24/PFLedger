@@ -130,7 +130,7 @@ class LedgerForm extends FormApplication
         return mergedOptions;
     }
 
-    static getData()
+    getData(options)
     {
         return { ledgers: LedgerData.getLedgerForActor(this.object) };
     }
