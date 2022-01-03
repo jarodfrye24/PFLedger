@@ -116,7 +116,7 @@ class CashConverter
     }
 }
 
-function addLedgerEntryExt(actor, description)
+function addLedgerEntry_Ext(actor, description)
 {
     //if for any reason actor is null, return early.
     if(actor === null)
@@ -185,7 +185,7 @@ function addLedgerButtons(sheet, jq, data)
     updateButton.classList.add("pfledger-button");
     updateButton.textContent = "Update Ledger";
     updateButton.title = updateTooltip;
-    updateButton.onClick = "addLedgerEntryExt(actor, descriptionBox.value)"
+    updateButton.setAttribute("onClick", "addLedgerEntry_Ext(actor, descriptionBox.value)");
     currencyTab.append(updateButton);
 
     const openLedgerButton = document.createElement("button");
