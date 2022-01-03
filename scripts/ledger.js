@@ -6,7 +6,7 @@ class Ledger
     static ID = 'PFLedger';
     static FLAGS = { LEDGERS: 'ledgers' }
 
-    static TEMPLATES = { LEDGERLIST: 'modules/${this.ID}/templates/ledger.hbs' }
+    static TEMPLATES = { LEDGERLIST: `modules/${this.ID}/templates/ledger.hbs` }
 
     static log(force, ...args)
     {  
@@ -129,11 +129,6 @@ class LedgerForm extends FormApplication
         const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
         
         return mergedOptions;
-    }
-
-    static getData(actor)
-    {
-
     }
 }
 
