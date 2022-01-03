@@ -6,14 +6,14 @@
         <tr>
           <th>Log</th>
           <th>Currency:</th>
-          <th>CP</th>
-          <th>SP</th>
-          <th>GP</th>
           <th>PP</th>
-          <th>Weightless:</th>
-          <th>CP</th>
-          <th>SP</th>
           <th>GP</th>
+          <th>SP</th>
+          <th>CP</th>
+          <th>Weightless:</th>
+          <th>PP</th>
+          <th>GP</th>
+          <th>SP</th>
           <th>PP</th>
           <th>Character</th>
           <th>User</th>
@@ -23,18 +23,33 @@
         {{#each ledgers}}
           <tr>
             <td>{{Log}}</td>
-            <td> </td>
-            <td>{{CP}}</td>
-            <td>{{SP}}</td>
-            <td>{{GP}}</td>
-            <td>{{PP}}</td>
-            <td> </td>
-            <td>{{altCP}}</td>
-            <td>{{altSP}}</td>
-            <td>{{altGP}}</td>
-            <td>{{altPP}}</td>
+            <td>|-------|</td>
+            <td>{{currencyDiff.pp}}</td>
+            <td>{{currencyDiff.gp}}</td>
+            <td>{{currencyDiff.sp}}</td>
+            <td>{{currencyDiff.cp}}</td>
+            <td>|---------|</td>
+            <td>{{altCurrencyDiff.pp}}</td>
+            <td>{{altCurrencyDiff.gp}}</td>
+            <td>{{altCurrencyDiff.sp}}</td>
+            <td>{{altCurrencyDiff.cp}}</td>
             <td>{{Character}}</td>
             <td>{{UserName}}</td>
+          </tr>
+          <tr>
+            <td>New Total:</td>
+            <td>|-------|</td>
+            <td>{{currency.pp}}</td>
+            <td>{{currency.gp}}</td>
+            <td>{{currency.sp}}</td>
+            <td>{{currency.cp}}</td>
+            <td>|---------|</td>
+            <td>{{altCurrency.pp}}</td>
+            <td>{{altCurrency.gp}}</td>
+            <td>{{altCurrency.sp}}</td>
+            <td>{{altCurrency.cp}}</td>
+            <td></td>
+            <td></td>
           </tr>
         {{/each}}
       </tbody>

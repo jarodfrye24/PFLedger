@@ -32,21 +32,17 @@ class LedgerData
     }
 
     //creates a new entry for the ledger
-    static addLedgerEntry(actor, userId, inCurrency, inAltCurrency, inLedgerLog)
+    static addLedgerEntry(actor, userId, inCurrency, inAltCurrency, inCurrencyDiff, inAltCurrencyDiff, inLedgerLog)
     {
         //generate new random id for this ledger entry and populate the userID
         const actorId = actor.id;
         const newLedgerEntry =
         {
             Log: inLedgerLog,
-            CP: inCurrency.cp,
-            SP: inCurrency.sp,
-            GP: inCurrency.gp,
-            PP: inCurrency.pp,
-            altCP: inAltCurrency.cp,
-            altSP: inAltCurrency.sp,
-            altGP: inAltCurrency.gp,
-            altPP: inAltCurrency.pp,
+            currency: inCurrency,
+            altCurrency: inAltCurrency,
+            currencyDif: inCurrencyDif,
+            altCurrencyDif: inAltCurrencyDif,
             Character: actor.name,
             UserName: game.users.get(userId).name,
             id: foundry.utils.randomID(16),
@@ -179,7 +175,7 @@ function addLedgerEntry_Ext(actor, description)
     if(lastEntry === null)
     {
         console.log('Ledger ! No last entry found, creating new entry');
-        LedgerData.addLedgerEntry(actor, userId, currency, altCurrency, "Initial entry.");
+        LedgerData.addLedgerEntry(actor, userId, currency, altCurrency, currency, altCurrency, "Initial entry.");
     }
     else
     {
@@ -187,9 +183,9 @@ function addLedgerEntry_Ext(actor, description)
         if(!CashConverter.currencyCheck(altCurrency, lastEntry.altCurrency) || !CashConverter.currencyCheck(currency, lastEntry.currency))
         {
             console.log('Ledger ! Changes detected, adding a new entry!');
-            const newCurrency = CashConverter.getCurrencyDelta(currency, lastEntry.currency);
-            const newAltCurrency = CashConverter.getCurrencyDelta(altCurrency, lastEntry.altCurrency);
-            LedgerData.addLedgerEntry(actor, userId, newCurrency, newAltCurrency, description);
+            const currencyDiff = CashConverter.getCurrencyDelta(currency, lastEntry.currency);
+            const altCurrencyDiff = CashConverter.getCurrencyDelta(altCurrency, lastEntry.altCurrency);
+            LedgerData.addLedgerEntry(actor, userId, lastEntry.currency, lastEntry.altCurrency, currencyDiff, altCurrencyDiff, description);
         }
     }
 }
