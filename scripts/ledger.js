@@ -41,8 +41,8 @@ class LedgerData
             Log: inLedgerLog,
             currency: inCurrency,
             altCurrency: inAltCurrency,
-            currencyDif: inCurrencyDif,
-            altCurrencyDif: inAltCurrencyDif,
+            currencyDiff: inCurrencyDiff,
+            altCurrencyDiff: inAltCurrencyDiff,
             Character: actor.name,
             UserName: game.users.get(userId).name,
             id: foundry.utils.randomID(16),
@@ -185,7 +185,7 @@ function addLedgerEntry_Ext(actor, description)
             console.log('Ledger ! Changes detected, adding a new entry!');
             const currencyDiff = CashConverter.getCurrencyDelta(currency, lastEntry.currency);
             const altCurrencyDiff = CashConverter.getCurrencyDelta(altCurrency, lastEntry.altCurrency);
-            LedgerData.addLedgerEntry(actor, userId, lastEntry.currency, lastEntry.altCurrency, currencyDiff, altCurrencyDiff, description);
+            LedgerData.addLedgerEntry(actor, userId, currency, altCurrency, currencyDiff, altCurrencyDiff, description);
         }
     }
 }
