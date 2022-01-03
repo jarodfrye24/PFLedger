@@ -54,20 +54,23 @@ class LedgerData
     static getActorLedgerLastEntry(actor, userId)
     {
         const ledgerEntries = this.getLedgerForUser(userId);
-        var actorEntries = new Array();
-        for(const ledgerEntry of Object.values(ledgerEntries))
+        if(ledgerEntries)
         {
-            if(ledgerEntry && ledgerEntry.actor)
+            var actorEntries = new Array();
+            for(const ledgerEntry of Object.values(ledgerEntries))
             {
-                if(ledgerEntry.actor === actor)
+                if(ledgerEntry && ledgerEntry.actor)
                 {
-                    actorEntries.push(ledgerEntry);
+                    if(ledgerEntry.actor === actor)
+                    {
+                        actorEntries.push(ledgerEntry);
+                    }
                 }
             }
-        }
-        if(actorEntries.length > 0)
-        {
-            return actorEntries[actorEntries.length-1];
+            if(actorEntries.length > 0)
+            {
+                return actorEntries[actorEntries.length-1];
+            }
         }
         return null;
     }
@@ -149,7 +152,7 @@ function addLedgerEntry_Ext(actor, description)
 
 function addLedgerButtons(sheet, jq, data)
 {
-    const actor = data.actor;
+    var actor = data.actor;
     if (!actor)
     {
         return;
@@ -185,7 +188,9 @@ function addLedgerButtons(sheet, jq, data)
     updateButton.classList.add("pfledger-button");
     updateButton.textContent = "Update Ledger";
     updateButton.title = updateTooltip;
-    updateButton.setAttribute("onClick", "addLedgerEntry_Ext(actor, descriptionBox.value)");
+    updateButton.addEventListener("click", event => {
+        addLedgerEntry_Ext(actor, descriptionBox.value)
+    });
     currencyTab.append(updateButton);
 
     const openLedgerButton = document.createElement("button");
