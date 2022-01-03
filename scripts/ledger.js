@@ -38,13 +38,19 @@ class LedgerData
         const actorId = actor.id;
         const newLedgerEntry =
         {
-            ledgerLog: inLedgerLog,
-            altCurrency: inAltCurrency,
-            currency: inCurrency,
-            id: foundry.utils.randomID(16),
-            character: actor.name,
-            actorId: actorId,
-            userName: game.users(userId).name,
+            Log: inLedgerLog,
+            CP: inCurrency.cp,
+            SP: inCurrency.sp,
+            GP: inCurrency.gp,
+            PP: inCurrency.pp,
+            altCP: inAltCurrency.cp,
+            altSP: inAltCurrency.sp,
+            altGP: inAltCurrency.gp,
+            altPP: inAltCurrency.pp,
+            Character: actor.name,
+            UserName: game.users.get(userId).name,
+            ID: foundry.utils.randomID(16),
+            ActorId: actorId,
         }
 
         const newEntries = { [newLedgerEntry.id]: newLedgerEntry }
@@ -117,6 +123,9 @@ class CashConverter
             gp : inCurrencyA.gp - inCurrencyB.gp,
             pp : inCurrencyA.pp - inCurrencyB.pp,
         }
+
+        currency.cp = currency.cp ? currency.cp : 00;
+        return currency;
     }
 }
 
@@ -134,6 +143,7 @@ class LedgerForm extends FormApplication
           id: 'ledger',
           template: Ledger.TEMPLATES.LEDGERLIST,
           title: 'Ledger',
+          currencies: ['cp', 'sp', 'gp', 'pp'],
         };
       
         const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
@@ -143,7 +153,8 @@ class LedgerForm extends FormApplication
 
     getData(options)
     {
-        return { ledgers: LedgerData.getLedgerForActor(this.object) };
+        var outLedgers = {ledgers: LedgerData.getLedgerForActor(this.object)};
+        return outLedgers;
     }
 }
 
@@ -156,6 +167,8 @@ function addLedgerEntry_Ext(actor, description)
         return;
     }
     const userId = game.user.id;
+    const altCurrency = actor.data.data.altCurrency;
+    const currency = actor.data.data.currency;
 
     const lastEntry = LedgerData.getActorLedgerLastEntry(actor, userId);
     //if the last entry is null, it doesn't exist, so we should make a new entry.
@@ -166,15 +179,12 @@ function addLedgerEntry_Ext(actor, description)
     }
     else
     {
-        const altCurrency = actor.data.data.altCurrency;
-        const currency = actor.data.data.currency;
-
         //check if there's a delta, if there is we need to create an entry.
         if(!CashConverter.currencyCheck(altCurrency, lastEntry.altCurrency) || !CashConverter.currencyCheck(currency, lastEntry.currency))
         {
             console.log('Ledger ! Changes detected, adding a new entry!');
-            const newCurrency = CashConverter.getCurrencyDelta(lastEntry.currency, currency);
-            const newAltCurrency = CashConverter.getCurrencyDelta(lastEntry.altCurrency, altCurrency);
+            const newCurrency = CashConverter.getCurrencyDelta(currency, lastEntry.currency);
+            const newAltCurrency = CashConverter.getCurrencyDelta(altCurrency, lastEntry.altCurrency);
             LedgerData.addLedgerEntry(actor, userId, newCurrency, newAltCurrency, description);
         }
     }
@@ -183,14 +193,6 @@ function addLedgerEntry_Ext(actor, description)
 function getActorLedger_Ext(actor)
 {
     var ledgerForm = new LedgerForm(actor).render(true, {actor});
-    // var currentLedger = LedgerData.getLedgerForActor(actor);
-    // for(const ledgerEntry of Object.values(currentLedger))
-    // {
-    //     if(ledgerEntry)
-    //     {
-    //         console.log('Ledger ! ' + ledgerEntry.id);
-    //     }
-    // }
 }
 
 function addLedgerButtons(sheet, jq, data)

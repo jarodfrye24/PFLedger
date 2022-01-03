@@ -1,9 +1,39 @@
 {{log 'ledgers' this}}
 <form>
   <ul>
-    <p>{"Description | Currency P/L | WL Currency P/L | Character | User"}</p>
-    {{#each ledgers}}
-      <li>{{ledgerLog} {currency} {altCurrency} {character} {userName}}</li>
-    {{/each}}
+    <table>
+      <thead>
+        <tr>
+          <th>Log</th>
+          <th>CP</th>
+          <th>SP</th>
+          <th>GP</th>
+          <th>PP</th>
+          <th>WL CP</th>
+          <th>WL SP</th>
+          <th>WL GP</th>
+          <th>wL PP</th>
+          <th>Character</th>
+          <th>User</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each ledgers}}
+          <tr>
+            <td>{{Log}}</td>
+            <td>{{CP}}</td>
+            <td>{{SP}}</td>
+            <td>{{GP}}</td>
+            <td>{{PP}}</td>
+            <td>{{altCP}}</td>
+            <td>{{altSP}}</td>
+            <td>{{altGP}}</td>
+            <td>{{altPP}}</td>
+            <td>{{Character}}</td>
+            <td>{{UserName}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
   </ul>
 </form>
