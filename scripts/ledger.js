@@ -49,7 +49,7 @@ class LedgerData
             altPP: inAltCurrency.pp,
             Character: actor.name,
             UserName: game.users.get(userId).name,
-            ID: foundry.utils.randomID(16),
+            id: foundry.utils.randomID(16),
             ActorId: actorId,
         }
 
@@ -68,7 +68,7 @@ class LedgerData
             {
                 if(ledgerEntry)
                 {
-                    if(ledgerEntry.actorId === actor.data._id)
+                    if(ledgerEntry.ActorId === actor.id)
                     {
                         actorEntries.push(ledgerEntry);
                     }
