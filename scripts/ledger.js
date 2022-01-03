@@ -6,7 +6,7 @@ class Ledger
     static ID = 'PFLedger';
     static FLAGS = { LEDGERS: 'ledgers' }
 
-    static TEMPLATES = { LEDGERLIST: 'modules/${this.ID}/templates/ledgers.hbs' }
+    static TEMPLATES = { LEDGERLIST: 'modules/${this.ID}/templates/ledger.hbs' }
 
     static log(force, ...args)
     {  
