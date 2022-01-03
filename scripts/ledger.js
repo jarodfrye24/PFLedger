@@ -124,10 +124,10 @@ class CashConverter
             pp : inCurrencyA.pp - inCurrencyB.pp,
         }
 
-        currency.cp = currency.cp ? currency.cp : 00;
-        currency.sp = currency.sp ? currency.sp : 00;
-        currency.gp = currency.gp ? currency.gp : 00;
-        currency.pp = currency.pp ? currency.pp : 00;
+        currency.cp = currency.cp ? currency.cp : 0;
+        currency.sp = currency.sp ? currency.sp : 0;
+        currency.gp = currency.gp ? currency.gp : 0;
+        currency.pp = currency.pp ? currency.pp : 0;
 
         return currency;
     }
