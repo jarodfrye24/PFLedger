@@ -130,6 +130,11 @@ class LedgerForm extends FormApplication
         
         return mergedOptions;
     }
+
+    static getData()
+    {
+        return LedgerData.getLedgerForActor(game.actors(options.actorId));
+    }
 }
 
 function addLedgerEntry_Ext(actor, description)
