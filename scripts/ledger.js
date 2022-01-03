@@ -19,6 +19,7 @@ class Ledger
     }
 }
 
+//data class
 class LedgerData
 {
     //get all ledgers in the game
@@ -76,6 +77,7 @@ class LedgerData
     }
 }
 
+//useful stuff
 class CashConverter
 {
     static convertCurrencyToCP(currency)
@@ -107,6 +109,28 @@ class CashConverter
     }
 }
 
+//the ledger form
+class LedgerForm extends FormApplication
+{
+    static get defaultOptions()
+    {
+        const defaults = super.defaultOptions;
+      
+        const overrides =
+        {
+          height: 'auto',
+          id: 'ledger',
+          template: Ledger.TEMPLATES.LEDGERLIST,
+          title: 'Cash Ledger',
+          userId: game.userId,
+        };
+      
+        const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
+        
+        return mergedOptions;
+      }
+}
+
 function addLedgerEntry_Ext(actor, description)
 {
     //if for any reason actor is null, return early.
@@ -136,6 +160,11 @@ function addLedgerEntry_Ext(actor, description)
             LedgerData.addLedgerEntry(actor, userId, description);
         }
     }
+}
+
+function getActorLedger_Ext(actor)
+{
+    var currentLedger = LedgerData.getLedgerForActor(actor);
 }
 
 function addLedgerButtons(sheet, jq, data)
@@ -185,6 +214,9 @@ function addLedgerButtons(sheet, jq, data)
     openLedgerButton.classList.add("pfledger-button");
     openLedgerButton.textContent = "Open Ledger...";
     openLedgerButton.title = openLedgerTooltip;
+    openLedgerButton.addEventListener("click", event => {
+        getActorLedger_Ext(actor)
+    });
     currencyTab.append(openLedgerButton);
 }
 
