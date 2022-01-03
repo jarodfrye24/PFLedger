@@ -2,9 +2,7 @@
 <form>
   <ul>
     {{#each ledgers}}
-      <li class="flexrow" pfledger-row-desc="{{ledgerLog}}">
-          <textarea type="text" value="{{ledgerLog}}" name="{{ledgerLog}}.label" data-dtype="String" />
-      </li>
+      <li class="flexrow" pfledger-row-desc="{{ledgerLog}}"></li>
     {{/each}}
   </ul>
 </form>
