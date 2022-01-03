@@ -7,11 +7,11 @@
         "name": "Lee 'Almighty_gir' Devonald"
       }
     ],
-    "version": "1.28a",
+    "version": "1.29a",
     "minimumCoreVersion": "0.80.2",
     "compatibleCoreVersion": "9.238",
     "scripts": [
-        "scripts/ledger.js"
+      "scripts/ledger.js"
     ],
     "esmodules": [],
     "styles": [

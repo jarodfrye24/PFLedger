@@ -123,12 +123,18 @@ class LedgerForm extends FormApplication
           template: Ledger.TEMPLATES.LEDGERLIST,
           title: 'Cash Ledger',
           userId: game.userId,
+          actorId: "tempActorId",
         };
       
         const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
         
         return mergedOptions;
-      }
+    }
+
+    static getData(actor)
+    {
+
+    }
 }
 
 function addLedgerEntry_Ext(actor, description)
@@ -164,7 +170,15 @@ function addLedgerEntry_Ext(actor, description)
 
 function getActorLedger_Ext(actor)
 {
-    var currentLedger = LedgerData.getLedgerForActor(actor);
+    new LedgerForm().render(true, {actor});
+    // var currentLedger = LedgerData.getLedgerForActor(actor);
+    // for(const ledgerEntry of Object.values(currentLedger))
+    // {
+    //     if(ledgerEntry)
+    //     {
+    //         console.log('Ledger ! ' + ledgerEntry.id);
+    //     }
+    // }
 }
 
 function addLedgerButtons(sheet, jq, data)
