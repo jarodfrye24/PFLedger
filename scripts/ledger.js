@@ -118,12 +118,11 @@ class LedgerForm extends FormApplication
       
         const overrides =
         {
-          height: 'auto',
+          height: '700',
+          width: '650',
           id: 'ledger',
           template: Ledger.TEMPLATES.LEDGERLIST,
-          title: 'Cash Ledger',
-          userId: game.userId,
-          actorId: "tempActorId",
+          title: 'Ledger',
         };
       
         const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
@@ -133,7 +132,7 @@ class LedgerForm extends FormApplication
 
     static getData()
     {
-        return LedgerData.getLedgerForActor(game.actors(options.actorId));
+        return LedgerData.getLedgerForActor(this.object);
     }
 }
 
@@ -170,7 +169,7 @@ function addLedgerEntry_Ext(actor, description)
 
 function getActorLedger_Ext(actor)
 {
-    new LedgerForm().render(true, {actor});
+    var ledgerForm = new LedgerForm(actor).render(true, {actor});
     // var currentLedger = LedgerData.getLedgerForActor(actor);
     // for(const ledgerEntry of Object.values(currentLedger))
     // {
