@@ -32,15 +32,15 @@ class LedgerData
     }
 
     //creates a new entry for the ledger
-    static addLedgerEntry(actor, userId, inLedgerLog)
+    static addLedgerEntry(actor, userId, inCurrency, inAltCurrency, inLedgerLog)
     {
         //generate new random id for this ledger entry and populate the userID
         const actorId = actor.id;
         const newLedgerEntry =
         {
             ledgerLog: inLedgerLog,
-            altCurrency: actor.data.data.altCurrency,
-            currency: actor.data.data.currency,
+            altCurrency: inAltCurrency,
+            currency: inCurrency,
             id: foundry.utils.randomID(16),
             character: actor.name,
             actorId: actorId,
@@ -107,6 +107,17 @@ class CashConverter
         inCurrencyA.gp == inCurrencyB.gp &&
         inCurrencyA.pp == inCurrencyB.pp;
     }
+
+    static getCurrencyDelta(inCurrencyA, inCurrencyB)
+    {
+        const currency = 
+        {
+            cp : inCurrencyA.cp - inCurrencyB.cp,
+            sp : inCurrencyA.sp - inCurrencyB.sp,
+            gp : inCurrencyA.gp - inCurrencyB.gp,
+            pp : inCurrencyA.pp - inCurrencyB.pp,
+        }
+    }
 }
 
 //the ledger form
@@ -151,7 +162,7 @@ function addLedgerEntry_Ext(actor, description)
     if(lastEntry === null)
     {
         console.log('Ledger ! No last entry found, creating new entry');
-        LedgerData.addLedgerEntry(actor, userId, "Initial entry.");
+        LedgerData.addLedgerEntry(actor, userId, currency, altCurrency, "Initial entry.");
     }
     else
     {
@@ -162,7 +173,9 @@ function addLedgerEntry_Ext(actor, description)
         if(!CashConverter.currencyCheck(altCurrency, lastEntry.altCurrency) || !CashConverter.currencyCheck(currency, lastEntry.currency))
         {
             console.log('Ledger ! Changes detected, adding a new entry!');
-            LedgerData.addLedgerEntry(actor, userId, description);
+            const newCurrency = CashConverter.getCurrencyDelta(lastEntry.currency, currency);
+            const newAltCurrency = CashConverter.getCurrencyDelta(lastEntry.altCurrency, altCurrency);
+            LedgerData.addLedgerEntry(actor, userId, newCurrency, newAltCurrency, description);
         }
     }
 }
