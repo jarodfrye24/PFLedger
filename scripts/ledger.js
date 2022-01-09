@@ -48,9 +48,8 @@ class LedgerData
             id: foundry.utils.randomID(16),
             ActorId: actorId,
         }
-
         const newEntries = { [newLedgerEntry.id]: newLedgerEntry }
-
+        
         return game.actors.get(actorId)?.setFlag(Ledger.ID, Ledger.FLAGS.LEDGERS, newEntries);
     }
 
