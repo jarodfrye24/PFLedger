@@ -1,53 +1,19 @@
-.pfledger-row-currency
-{
-  width: 50px;
-  height: auto;
-  content: "\f58e";
-  font-weight: 900;
-  font-family: "Font Awesome 5 Free";
-  font-size: 12px;
-  font-variant: small-caps;
-  color: #4b4a44;
-  margin: 0;
+table {
+  width: 100%;
+  align-content: center;
 }
 
-.pfledger-row-user
-{
-  width: 50px;
-  height: auto;
-  content: "\f58e";
-  font-weight: 900;
-  font-family: "Font Awesome 5 Free";
-  font-size: 12px;
-  font-variant: small-caps;
-  color: #4b4a44;
-  margin: 0;
+table, th, td {
+  border: 1px solid #6c6c6c;
+  border-collapse: collapse;
+  align-content: center;
 }
 
-.pfledger-row-character
-{
-  width: 50px;
-  height: auto;
-  content: "\f58e";
-  font-weight: 900;
-  font-family: "Font Awesome 5 Free";
-  font-size: 12px;
-  font-variant: small-caps;
-  color: #4b4a44;
-  margin: 0;
-}
-
-.pfledger-row-desc
-{
-  width: 250px;
-  height: auto;
-  content: "\f58e";
-  font-weight: 900;
-  font-family: "Font Awesome 5 Free";
-  font-size: 12px;
-  font-variant: small-caps;
-  color: #4b4a44;
-  margin: 0;
+th, td {
+  text-align: center;
+  font-size: 11px;
+  font-style: oblique;
+  font-family: serif
 }
 
 .pfledger-desc-box
