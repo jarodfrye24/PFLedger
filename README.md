@@ -10,6 +10,7 @@ The user can click "Open Ledger..." to view all of their ledger entries.
 
 The ledger shows:
 The log entry, the currency diff, the weightless currency diff, which character made the entry, which user made the entry.
+
 ![image](https://user-images.githubusercontent.com/6026593/148808405-6542443a-4a2e-4983-8dd4-035176ee7e4f.png)
 
 
