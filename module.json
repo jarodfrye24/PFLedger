@@ -2,32 +2,46 @@
     "name": "PFLedger",
     "title": "Pathfinder Ledger",
     "description": "A simple module which records money in and out.",
+    "version": "This is auto replaced",
+    "library": "false",
+    "manifestPlusVersion": "1.0.0",
+    "minimumCoreVersion": "0.79.10",
+    "compatibleCoreVersion": "9",
     "authors": [
       {
-        "name": "Lee 'Almighty_gir' Devonald"
+        "name": "Lee 'Almighty_gir' Devonald",
+        "url": "https://github.com/Almightygir/PFLedger",
+        "discord": "Almighty_gir#6379"
       }
     ],
-    "version": "1.0.1",
-    "minimumCoreVersion": "0.79.10",
-    "compatibleCoreVersion": "9.238",
+    "dependencies": [
+  
+    ],
+    "conflicts": [
+      
+    ],
+    "esmodules": [
+
+    ],
     "scripts": [
       "scripts/ledger.js"
     ],
-    "esmodules": [],
     "styles": [
       "css/ledger.css"
     ],
-    "languages": [],
+    "languages": [
+
+    ],
     "packs": [],
     "system": [
         "pf1"
     ],
-    "dependencies": [],
     "socket": false,
-    "url": "https://github.com/Almightygir/PFLedger",
-    "manifest": "https://github.com/Almightygir/PFLedger/raw/main/module.json",
-    "download": "https://github.com/Almightygir/PFLedger/archive/refs/heads/main.zip",
+    "url": "This is auto replaced",
+    "manifest": "This is auto replaced",
+    "download": "This is auto replaced",
     "protected": false,
     "coreTranslation": false,
-    "library": false
+    "media": [
+    ]
   }
