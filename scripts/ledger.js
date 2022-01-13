@@ -197,7 +197,7 @@ function getActorLedger_Ext(actor)
 function addLedgerButtons(sheet, jq, data)
 {
     var actor = data.actor;
-    if (!actor)
+    if (!actor || !actor.isOwner)
     {
         return;
     }
