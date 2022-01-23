@@ -58,7 +58,7 @@ class LedgerData
         const ledgerEntries = this.getLedgerForActor(actor);
         if(ledgerEntries)
         {
-            var actorEntries = new Array();
+            let actorEntries = new Array();
             for(const ledgerEntry of Object.values(ledgerEntries))
             {
                 if(ledgerEntry)
@@ -83,7 +83,7 @@ class CashConverter
 {
     static convertCurrencyToCP(currency)
     {
-        var CP = currency.cp;
+        let CP = currency.cp;
         CP += currency.sp * 10;
         CP += currency.gp * 100;
         CP += currency.pp * 1000;
@@ -93,7 +93,7 @@ class CashConverter
     
     static convertToCP(inCP, inSP, inGP, inPP)
     {
-        var CP = inCP;
+        let CP = inCP;
         CP += inSP * 10;
         CP += inGP * 100;
         CP += inPP * 1000;
@@ -152,7 +152,7 @@ class LedgerForm extends FormApplication
 
     getData(options)
     {
-        var outLedgers = {ledgers: LedgerData.getLedgerForActor(this.object)};
+        let outLedgers = {ledgers: LedgerData.getLedgerForActor(this.object)};
         return outLedgers;
     }
 }
@@ -191,12 +191,12 @@ function addLedgerEntry_Ext(actor, description)
 
 function getActorLedger_Ext(actor)
 {
-    var ledgerForm = new LedgerForm(actor).render(true, {actor});
+    let ledgerForm = new LedgerForm(actor).render(true, {actor});
 }
 
 function addLedgerButtons(sheet, jq, data)
 {
-    var actor = data.actor;
+    const actor = data.actor;
     if (!actor || !actor.isOwner)
     {
         return;
@@ -247,6 +247,57 @@ function addLedgerButtons(sheet, jq, data)
     currencyTab.append(openLedgerButton);
 }
 
+Hooks.on('renderActorSheetPF', addLedgerButtons);
+
+
+//GM ledger forms.
+class ledgerFormGM extends FormApplication
+{
+    static get defaultOptions()
+    {
+        const defaults = super.defaultOptions;
+      
+        const overrides =
+        {
+          height: '700',
+          width: '650',
+          id: 'ledger',
+          template: Ledger.TEMPLATES.LEDGERLIST,
+          title: 'Ledger',
+          currencies: ['cp', 'sp', 'gp', 'pp'],
+        };
+      
+        const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
+        
+        return mergedOptions;
+    }
+
+    getData(options)
+    {  
+        let allLedgers;
+        game.actors.forEach(actor =>{
+            const currentLedgers = LedgerData.getLedgerForActor(actor);
+            if(currentLedgers)
+            {
+                if(!allLedgers)
+                {
+                    allLedgers = currentLedgers;
+                }
+                else
+                {
+                    allLedgers = {...allLedgers, ...currentLedgers};
+                }
+            }
+        });
+        return {ledgers: allLedgers};
+    }
+}
+
+function getGMLedger_Ext()
+{
+    let gmLedgerForm = new ledgerFormGM().render(true);
+}
+
 function GMLedgerButton(sheet)
 {
     if(!game.user.isGM)
@@ -266,8 +317,10 @@ function GMLedgerButton(sheet)
     openGMLedgerButton.textContent = ledgerButtonContents;
     openGMLedgerButton.title = openLedgerTooltip;
     openGMLedgerButton.id = "PathfinderGMLedgerButton";
+    openGMLedgerButton.addEventListener("click", event =>{
+        getGMLedger_Ext();
+    })
     pfDetailsTab.append(openGMLedgerButton);
 }
 
-Hooks.on('renderActorSheetPF', addLedgerButtons);
 Hooks.on('changeSidebarTab', GMLedgerButton);
