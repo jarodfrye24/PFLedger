@@ -1,19 +1,18 @@
-table {
-  width: 100%;
-  align-content: center;
-}
-
-table, th, td {
-  border: 1px solid #6c6c6c;
+.pfledger-table, .pfledger-td {
+  border: 1px solid #000000;
   border-collapse: collapse;
+  width: 98%;
   align-content: center;
-}
-
-.pfledgerTH {
   text-align: center;
   font-size: 11px;
   font-style: oblique;
-  font-family: serif
+  font-family: serif;
+  padding: 4px;
+}
+
+.pfledger-th{
+  font-style: normal;
+  font-size: 10px
 }
 
 .pfledger-desc-box
@@ -21,8 +20,7 @@ table, th, td {
   min-width: 457px;
   content: "\f58e";
   font-weight: 900;
-  font-family: serif;
-  font-style: oblique;
+  font-family: "Font Awesome 5 Free";
   font-size: 12px;
   font-variant: small-caps;
   color: #4b4a44;

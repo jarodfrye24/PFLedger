@@ -1,58 +1,57 @@
 {{log 'ledgers' this}}
-<form>
-  <ul>
-    <table>
-      <thead>
-        <tr>
-          <th>Log</th>
-          <th>Currency:</th>
-          <th>PP</th>
-          <th>GP</th>
-          <th>SP</th>
-          <th>CP</th>
-          <th>Weightless:</th>
-          <th>PP</th>
-          <th>GP</th>
-          <th>SP</th>
-          <th>CP</th>
-          <th>Character</th>
-          <th>User</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each ledgers}}
+<div class = "pfledger">
+  <form>
+    <ul>
+      <table class = "pfledger-table">
+        <thead>
           <tr>
-            <td>{{Log}}</td>
-            <td></td>
-            <td>{{currencyDiff.pp}}</td>
-            <td>{{currencyDiff.gp}}</td>
-            <td>{{currencyDiff.sp}}</td>
-            <td>{{currencyDiff.cp}}</td>
-            <td></td>
-            <td>{{altCurrencyDiff.pp}}</td>
-            <td>{{altCurrencyDiff.gp}}</td>
-            <td>{{altCurrencyDiff.sp}}</td>
-            <td>{{altCurrencyDiff.cp}}</td>
-            <td>{{Character}}</td>
-            <td>{{UserName}}</td>
+            <th class = "pfledger-th">Log</th>
+            <th class = "pfledger-th">PP</th>
+            <th class = "pfledger-th">GP</th>
+            <th class = "pfledger-th">SP</th>
+            <th class = "pfledger-th">CP</th>
+            <th class = "pfledger-th">WL:</th>
+            <th class = "pfledger-th">PP</th>
+            <th class = "pfledger-th">GP</th>
+            <th class = "pfledger-th">SP</th>
+            <th class = "pfledger-th">CP</th>
+            <th class = "pfledger-th">Character</th>
+            <th class = "pfledger-th">User</th>
           </tr>
-          <tr>
-            <td>New Total:</td>
-            <td></td>
-            <td>{{currency.pp}}</td>
-            <td>{{currency.gp}}</td>
-            <td>{{currency.sp}}</td>
-            <td>{{currency.cp}}</td>
-            <td></td>
-            <td>{{altCurrency.pp}}</td>
-            <td>{{altCurrency.gp}}</td>
-            <td>{{altCurrency.sp}}</td>
-            <td>{{altCurrency.cp}}</td>
-            <td></td>
-            <td></td>
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
-  </ul>
-</form>
+        </thead>
+        <tbody>
+          {{#each ledgers}}
+            <tr>
+              <td class = "pfledger-td">{{Log}}</td>
+              <td class = "pfledger-td">{{currencyDiff.pp}}</td>
+              <td class = "pfledger-td">{{currencyDiff.gp}}</td>
+              <td class = "pfledger-td">{{currencyDiff.sp}}</td>
+              <td class = "pfledger-td">{{currencyDiff.cp}}</td>
+              <td class = "pfledger-td"></td>
+              <td class = "pfledger-td">{{altCurrencyDiff.pp}}</td>
+              <td class = "pfledger-td">{{altCurrencyDiff.gp}}</td>
+              <td class = "pfledger-td">{{altCurrencyDiff.sp}}</td>
+              <td class = "pfledger-td">{{altCurrencyDiff.cp}}</td>
+              <td class = "pfledger-td">{{Character}}</td>
+              <td class = "pfledger-td">{{UserName}}</td>
+            </tr>
+            <tr>
+              <td class = "pfledger-td">New Total:</td>
+              <td class = "pfledger-td">{{currency.pp}}</td>
+              <td class = "pfledger-td">{{currency.gp}}</td>
+              <td class = "pfledger-td">{{currency.sp}}</td>
+              <td class = "pfledger-td">{{currency.cp}}</td>
+              <td class = "pfledger-td"></td>
+              <td class = "pfledger-td">{{altCurrency.pp}}</td>
+              <td class = "pfledger-td">{{altCurrency.gp}}</td>
+              <td class = "pfledger-td">{{altCurrency.sp}}</td>
+              <td class = "pfledger-td">{{altCurrency.cp}}</td>
+              <td class = "pfledger-td"></td>
+              <td class = "pfledger-td"></td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </ul>
+  </form>
+</div>
