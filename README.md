@@ -14,5 +14,6 @@ The log entry, the currency diff, the weightless currency diff, which character 
 ![image](https://user-images.githubusercontent.com/6026593/148808405-6542443a-4a2e-4983-8dd4-035176ee7e4f.png)
 
 
-#Future plans
-I plan to make a GM only ledger, which will show the combined entries from all characters, allowing them a quick, easy way of seeing how players are spending or hoarding their currencies.
+The GM can also find an option under `Settings > Pathfinder 1 > Open Ledgers...` to get a comprehensive list of all actor ledgers in their game!
+![image](https://user-images.githubusercontent.com/6026593/150661956-fd8b1ec7-a0af-4aa1-b7c1-30c469576b27.png)
+
