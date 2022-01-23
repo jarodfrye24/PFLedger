@@ -9,7 +9,7 @@ table, th, td {
   align-content: center;
 }
 
-th, td {
+.pfledgerTH {
   text-align: center;
   font-size: 11px;
   font-style: oblique;
@@ -21,7 +21,8 @@ th, td {
   min-width: 457px;
   content: "\f58e";
   font-weight: 900;
-  font-family: "Font Awesome 5 Free";
+  font-family: serif;
+  font-style: oblique;
   font-size: 12px;
   font-variant: small-caps;
   color: #4b4a44;

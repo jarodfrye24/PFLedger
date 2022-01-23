@@ -247,4 +247,27 @@ function addLedgerButtons(sheet, jq, data)
     currencyTab.append(openLedgerButton);
 }
 
+function GMLedgerButton(sheet)
+{
+    if(!game.user.isGM)
+    {
+        return;
+    }
+
+    const openLedgerTooltip = 'Opens the combined player ledgers';
+    const ledgerButtonContents = 'Open Ledgers...';
+
+    const pfDetailsTab = sheet.element[0].querySelector('#pf1-details');
+    if(!pfDetailsTab || pfDetailsTab.querySelector('#PathfinderGMLedgerButton'))
+    {
+        return;
+    }
+    const openGMLedgerButton = document.createElement("button");
+    openGMLedgerButton.textContent = ledgerButtonContents;
+    openGMLedgerButton.title = openLedgerTooltip;
+    openGMLedgerButton.id = "PathfinderGMLedgerButton";
+    pfDetailsTab.append(openGMLedgerButton);
+}
+
 Hooks.on('renderActorSheetPF', addLedgerButtons);
+Hooks.on('changeSidebarTab', GMLedgerButton);
