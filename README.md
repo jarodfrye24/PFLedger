@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Foundry-v0.7.9-informational)![Latest Release Download Count](https://github.com/Almightygir/PFLedger/releases)![Forge Installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2FPFLedger&colorB=4aa94a)
+
 # PFLedger
 A ledger system for Pathfinder games!
 
