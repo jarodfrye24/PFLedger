@@ -17,5 +17,6 @@ The log entry, the currency diff, the weightless currency diff, which character 
 
 
 The GM can also find an option under `Settings > Pathfinder 1 > Open Ledgers...` to get a comprehensive list of all actor ledgers in their game!
+
 ![image](https://user-images.githubusercontent.com/6026593/150661956-fd8b1ec7-a0af-4aa1-b7c1-30c469576b27.png)
 
