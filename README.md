@@ -1,4 +1,4 @@
-![](https://img.shields.io/badge/Foundry-v0.7.9-informational)![Latest Release Download Count](https://img.shields.io/github/downloads/Almightygir/PFLedger/latest/module.zip)![Forge Installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2FPFLedger&colorB=4aa94a)
+[![](https://img.shields.io/badge/Foundry-v0.7.9-informational)]()[![download_count](https://img.shields.io/github/downloads/Almightygir/PFLedger/total.svg)]()[![Forge Installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2FPFLedger&colorB=4aa94a)]()[![Donate](https://img.shields.io/badge/Donate-BuyMeACoffee-green.svg)](https://ko-fi.com/almighty_gir)
 
 # PFLedger
 A ledger system for Pathfinder games!
