@@ -224,8 +224,27 @@ function addLedgerButtons(sheet, jq, data)
 
     const descriptionBox = document.createElement("input");
     descriptionBox.classList.add("pfledger-desc-box");
+    descriptionBox.setAttribute("value", "");
+    descriptionBox.placeholder = "...";
+    descriptionBox.addEventListener('keypress' , function(event){
+        if (event.key ===  "Enter"){
+            event.preventDefault();
+            updateButton.click;
+        }
+    }
+)
+
+
     const updateButton = document.createElement("button");
     updateButton.classList.add("pfledger-button");
+    updateButton.textContent = "Update Ledger";
+    updateButton.title = updateTooltip;
+    updateButton.addEventListener("click", event => {
+        descriptionBox.title = descBoxTooltip;
+        currencyTab.append(descriptionBox);
+        addLedgerEntry_Ext(actor, descriptionBox.value)
+    });
+    currencyTab.append(updateButton);
 
     const openLedgerButton = document.createElement("button");
     openLedgerButton.classList.add("pfledger-button");
