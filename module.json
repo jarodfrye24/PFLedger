@@ -1,36 +1,28 @@
 {
   "id": "pathfinder-ledger",
   "title": "Pathfinder Ledger",
-  "version": "1.0.08",
+  "description": "Test Update for Pathfinder Ledger",
+  "version": "1.0.08,
+  "library": "false",
   "compatibility": {
-    "minimum": "12",
-    "verified": "12",
-	"authors": [
-		{
-			"name": "Jarod Frye",
-			"url": "https://github.com/jarodfrye24/PFLedger"
-			
-		}
-	],
-    "scripts": [
-      "scripts/ledger.js"
-    ],
-    "styles": [
-      "css/ledger.css"
-    ],
-    "languages": [
-
-    ],
-    "packs": [],
-    "system": [
-        "pf1"
-    ],
-    "socket": false,
-    "url": "https://github.com/jarodfrye24/PFLedger",
-    "manifest": "https://github.com/jarodfrye24/PFLedger/releases/download/Test/module.json",
-    "download": "https://github.com/jarodfrye24/PFLedger/releases/download/Test/PFLedger.zip",
-    "protected": false,
-    "coreTranslation": false,
-    "media": [
-    ]
-  }}
+    "minimum": 12,
+    "verified": 12,
+    "maximum": 13
+  },
+  "authors": [
+    {
+      "name": "Jarod Frye",
+      "url": "https://github.com/jarodfrye24/PFLedger",
+      "discord": "discordID#0001"
+    }
+  ],
+  "scripts": [
+    "scripts/ledger.js"
+  ],
+  "styles": [
+    "styles/ledger.css"
+  ],
+  "url": "https://github.com/jarodfrye24/PFLedger",
+  "manifest": "https://github.com/jarodfrye24/PFLedger/releases/download/Test/module.json",
+  "download": "https://github.com/jarodfrye24/PFLedger/releases/download/Test/PFLedger.zip",
+}
