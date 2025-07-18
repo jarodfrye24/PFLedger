@@ -1,29 +1,17 @@
 {
-    "name": "PFLedger",
-    "title": "Pathfinder Ledger",
-    "description": "A simple module which records money in and out.",
-    "version": "This is auto replaced",
-    "library": "false",
-    "manifestPlusVersion": "1.0.0",
-    "minimumCoreVersion": "0.7.9",
-    "compatibleCoreVersion": "9",
-    "minimumSystemVersion": "0.77.23",
-    "authors": [
-      {
-        "name": "Jarod Frye",
-        "url": "https://github.com/jarodfrye24/PFLedger",
-        "discord": "None"
-      }
-    ],
-    "dependencies": [
-  
-    ],
-    "conflicts": [
-      
-    ],
-    "esmodules": [
-
-    ],
+  "id": "pathfinder-ledger",
+  "title": "Pathfinder Ledger",
+  "version": "1.0.08",
+  "compatibility": {
+    "minimum": "12",
+    "verified": "12",
+	"authors": [
+		{
+			"name": "Jarod Frye",
+			"url": "https://github.com/jarodfrye24/PFLedger"
+			
+		}
+	],
     "scripts": [
       "scripts/ledger.js"
     ],
@@ -45,4 +33,4 @@
     "coreTranslation": false,
     "media": [
     ]
-  }
+  }}
