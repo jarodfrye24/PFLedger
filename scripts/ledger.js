@@ -222,23 +222,24 @@ function addLedgerButtons(sheet, jq, data)
     const newRow = document.createElement("flexrow");
     newRow.classList.add("pfledger-spacer");
 
-    const descriptionBox = document.createElement("input");
-    
-    descriptionBox.classList.add("pfledger-desc-box");
-    descriptionBox.setAttribute("value", "");
+    const descriptionBox = document.getElementById('input');
     descriptionBox.placeholder = "...";
-    descriptionBox.title = descBoxTooltip;
-    currencyTab.append(descriptionBox);
+    descriptionBox.setAttribute("value", "");
+    
+    const updateButton = document.getElementById('button');
+    updateButton.textContent = "Update Ledger"
 
-    const updateButton = document.createElement("button");
-    updateButton.classList.add("pfledger-button");
-    updateButton.textContent = "Update Ledger";
-    updateButton.title = updateTooltip;
-    updateButton.addEventListener("click", event => {
-        currencyTab.append(descriptionBox)
+    descriptionBox.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            updateButton.click()
+        }
+    })
+
+    updateButton.addEventListener('click' , function() {
+        descriptionBox.classList.add("pfledger-desc-box");
         addLedgerEntry_Ext(actor, descriptionBox.value)
-    });
-    currencyTab.append(updateButton);
+    })
 
     const openLedgerButton = document.createElement("button");
     openLedgerButton.classList.add("pfledger-button");
