@@ -20,7 +20,7 @@
   min-width: 457px;
   content: "\f58e";
   font-weight: 900;
-  font-family: "Font Awesome 5 Free";
+  font-family: var(--font-primary);
   font-size: 12px;
   font-variant: small-caps;
   color: #4b4a44;
@@ -29,14 +29,14 @@
 
 .pfledger-button
 {
-  font-size: 12px;
+  font-size: 13.5px;
   line-height: 12px;
   height: auto;
   width: auto;
   margin: 0, 8px;
   content: "\f58e";
-  font-weight: 900;
-  font-family: "Font Awesome 5 Free";
+  font-weight: 700;
+  font-family: var(--font-primary);
 }
 
 .pfledger-spacer
