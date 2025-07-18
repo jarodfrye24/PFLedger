@@ -235,6 +235,7 @@ function addLedgerButtons(sheet, jq, data)
     updateButton.textContent = "Update Ledger";
     updateButton.title = updateTooltip;
     updateButton.addEventListener("click", event => {
+        currencyTab.append(descriptionBox)
         addLedgerEntry_Ext(actor, descriptionBox.value)
     });
     currencyTab.append(updateButton);
