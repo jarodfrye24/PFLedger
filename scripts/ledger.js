@@ -226,7 +226,7 @@ function addLedgerButtons(sheet, jq, data)
     descriptionBox.classList.add("pfledger-desc-box");
     descriptionBox.setAttribute("value", "");
     descriptionBox.placeholder = "...";
-    descriptionBox.title = descBoxTooltip;
+    currencyTab.append(descriptionBox)
     descriptionBox.addEventListener('keypress' , function(event){
         if (event.key ===  "Enter"){
             event.preventDefault();
@@ -240,8 +240,7 @@ function addLedgerButtons(sheet, jq, data)
     updateButton.classList.add("pfledger-button");
     updateButton.textContent = "Update Ledger";
     updateButton.title = updateTooltip;
-    updateButton.addEventListener("click", event => {
-        
+    updateButton.addEventListener("click", function() {
         currencyTab.append(descriptionBox);
         addLedgerEntry_Ext(actor, descriptionBox.value)
     });
