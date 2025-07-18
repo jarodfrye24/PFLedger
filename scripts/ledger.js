@@ -209,7 +209,7 @@ function addLedgerButtons(sheet, jq, data)
         return;
     }
 
-    const currencyTab = tab.querySelector('.inventory-filters');
+    const currencyTab = tab.querySelector('.currencies');
     if (!currencyTab)
     {
         return;
