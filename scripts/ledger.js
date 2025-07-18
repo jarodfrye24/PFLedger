@@ -223,8 +223,10 @@ function addLedgerButtons(sheet, jq, data)
     newRow.classList.add("pfledger-spacer");
 
     const descriptionBox = document.createElement("input");
+    
     descriptionBox.classList.add("pfledger-desc-box");
     descriptionBox.placeholder = "...";
+    descriptionBox.setAttribute("value", "");
     descriptionBox.title = descBoxTooltip;
     currencyTab.append(descriptionBox);
 
@@ -233,6 +235,7 @@ function addLedgerButtons(sheet, jq, data)
     updateButton.textContent = "Update Ledger";
     updateButton.title = updateTooltip;
     updateButton.addEventListener("click", event => {
+        currencyTab.append(descriptionBox)
         addLedgerEntry_Ext(actor, descriptionBox.value)
     });
     currencyTab.append(updateButton);
