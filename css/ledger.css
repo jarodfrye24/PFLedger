@@ -34,7 +34,7 @@
   line-height: 12px;
   height: auto;
   width: auto;
-  margin: 0px;
+  margin: 0.8 px;
   content: "\f58e";
   font-family: var(--font-primary);
 }
