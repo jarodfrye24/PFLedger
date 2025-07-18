@@ -10,9 +10,9 @@
     "minimumSystemVersion": "0.77.23",
     "authors": [
       {
-        "name": "Lee 'Almighty_gir' Devonald",
-        "url": "https://github.com/Almightygir/PFLedger",
-        "discord": "Almighty_gir#6379"
+        "name": "Jarod Frye",
+        "url": "https://github.com/jarodfrye24/PFLedger",
+        "discord": "None"
       }
     ],
     "dependencies": [
@@ -38,9 +38,9 @@
         "pf1"
     ],
     "socket": false,
-    "url": "This is auto replaced",
-    "manifest": "This is auto replaced",
-    "download": "This is auto replaced",
+    "url": "https://github.com/jarodfrye24/PFLedger",
+    "manifest": "https://github.com/jarodfrye24/PFLedger/releases/download/Test/module.json",
+    "download": "https://github.com/jarodfrye24/PFLedger/releases/download/Test/PFLedger.zip",
     "protected": false,
     "coreTranslation": false,
     "media": [
