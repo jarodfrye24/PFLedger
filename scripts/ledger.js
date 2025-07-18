@@ -166,8 +166,8 @@ function addLedgerEntry_Ext(actor, description)
         return;
     }
     const userId = game.user.id;
-    const altCurrency = actor.data.data.altCurrency;
-    const currency = actor.data.data.currency;
+    const altCurrency = actor.system.altCurrency;
+    const currency = actor.system.currency;
 
     const lastEntry = LedgerData.getActorLedgerLastEntry(actor, userId);
     //if the last entry is null, it doesn't exist, so we should make a new entry.
