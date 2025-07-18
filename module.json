@@ -20,7 +20,7 @@
     "scripts/ledger.js"
   ],
   "styles": [
-    "styles/ledger.css"
+    "css/ledger.css"
   ],
   "url": "https://github.com/jarodfrye24/PFLedger",
   "manifest": "https://github.com/jarodfrye24/PFLedger/releases/download/Test/module.json",
