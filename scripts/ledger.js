@@ -224,7 +224,7 @@ function addLedgerButtons(sheet, jq, data)
 
     const descriptionBox = document.createElement("input");
     descriptionBox.classList.add("pfledger-desc-box");
-    descriptionBox.setAttribute("value", "...");
+    descriptionBox.placeholder = "...";
     descriptionBox.title = descBoxTooltip;
     currencyTab.append(descriptionBox);
 
