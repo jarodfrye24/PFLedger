@@ -17,12 +17,13 @@
 
 .pfledger-desc-box
 {
-  min-width: 457px;
+  min-width: 600px;
   content: "\f58e";
   font-weight: 400;
   font-family: var(--font-primary);
   font-size: 14.625px;
   color: #191813;
+  background-color: rgba(255, 255, 255, 0.6);
   margin: 0;
 }
 
@@ -32,7 +33,7 @@
   line-height: 12px;
   height: auto;
   width: auto;
-  margin: 0, 8px;
+  margin: 0px;
   content: "\f58e";
   font-family: var(--font-primary);
 }
