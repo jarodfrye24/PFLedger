@@ -19,11 +19,10 @@
 {
   min-width: 457px;
   content: "\f58e";
-  font-weight: 900;
+  font-weight: 400;
   font-family: var(--font-primary);
-  font-size: 12px;
-  font-variant: small-caps;
-  color: #4b4a44;
+  font-size: 14.625px;
+  color: #191813;
   margin: 0;
 }
 
@@ -35,7 +34,6 @@
   width: auto;
   margin: 0, 8px;
   content: "\f58e";
-  font-weight: 700;
   font-family: var(--font-primary);
 }
 
