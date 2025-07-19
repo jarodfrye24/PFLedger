@@ -252,6 +252,14 @@ function addLedgerButtons(sheet, jq, data)
         getActorLedger_Ext(actor)
     });
     currencyTab.append(openLedgerButton);
+
+    const deleteLedgerButton = document.createElement("button");
+    deleteLedgerButton.classList.add("pfledger-button");
+    deleteLedgerButton.textContent = "Delete Ledger";
+    deleteLedgerButton.addEventListener("click", event => {
+        document.ledgerEntries.remove(actor)
+    });
+    currencyTab.append(deleteLedgerButton);
 }
 
 Hooks.on('renderActorSheetPF', addLedgerButtons);
