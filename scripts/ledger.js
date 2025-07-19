@@ -257,7 +257,7 @@ function addLedgerButtons(sheet, jq, data)
     deleteLedgerButton.classList.add("pfledger-button");
     deleteLedgerButton.textContent = "Delete Ledger";
     deleteLedgerButton.addEventListener("click", event => {
-        LedgerData.ledgerEntries.remove();
+        LedgerData.remove(currentLedgers);
     });
     currencyTab.append(deleteLedgerButton);
 }
