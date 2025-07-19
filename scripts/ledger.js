@@ -22,7 +22,6 @@ class Ledger
 //data class
 class LedgerData
 {
-    debugger;
     //get all ledgers in the game
     static get allLegers() {}
 
@@ -198,7 +197,7 @@ function getActorLedger_Ext(actor)
 function clearActorLedger(actor){
     const lastEntry = LedgerData.getActorLedgerLastEntry(actor)
     if (lastEntry){
-        delete lastEntry;
+        remove(lastEntry);
     }
 
 }
