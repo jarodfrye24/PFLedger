@@ -22,6 +22,7 @@ class Ledger
 //data class
 class LedgerData
 {
+    debugger;
     //get all ledgers in the game
     static get allLegers() {}
 
@@ -257,7 +258,7 @@ function addLedgerButtons(sheet, jq, data)
     deleteLedgerButton.classList.add("pfledger-button");
     deleteLedgerButton.textContent = "Delete Ledger";
     deleteLedgerButton.addEventListener("click", event => {
-        LedgerData.remove(actor)
+        actor.LedgerData.remove();
     });
     currencyTab.append(deleteLedgerButton);
 }
