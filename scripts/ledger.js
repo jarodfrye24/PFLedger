@@ -196,8 +196,8 @@ function getActorLedger_Ext(actor)
 }
 
 function clearActorLedger(actor){
-
-    LedgerData.remove();
+    const lastEntry = LedgerData.getActorLedgerLastEntry(actor, userId)
+    lastEntry.remove();
 
 }
 
