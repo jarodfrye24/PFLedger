@@ -195,6 +195,12 @@ function getActorLedger_Ext(actor)
     let ledgerForm = new LedgerForm(actor).render(true, {actor});
 }
 
+function clearActorLedger(actor){
+
+    LedgerData.remove();
+
+}
+
 function addLedgerButtons(sheet, jq, data)
 {
     const actor = data.actor;
@@ -258,7 +264,7 @@ function addLedgerButtons(sheet, jq, data)
     deleteLedgerButton.classList.add("pfledger-button");
     deleteLedgerButton.textContent = "Delete Ledger";
     deleteLedgerButton.addEventListener("click", event => {
-        actor.LedgerData.remove();
+        clearActorLedger(actor);
     });
     currencyTab.append(deleteLedgerButton);
 }
