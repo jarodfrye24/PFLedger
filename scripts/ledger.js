@@ -196,10 +196,10 @@ function getActorLedger_Ext(actor)
 }
 
 function clearActorLedger(actor){
-    const userId = game.user.id;
-    const lastEntry = LedgerData.getActorLedgerLastEntry(actor, userId)
-    
-    lastEntry.remove();
+    const lastEntry = LedgerData.getActorLedgerLastEntry(actor)
+    if (lastEntry){
+        lastEntry.remove();
+    }
 
 }
 
