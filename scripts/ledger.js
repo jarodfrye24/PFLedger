@@ -22,6 +22,7 @@ class Ledger
 //data class
 class LedgerData
 {
+    
     //get all ledgers in the game
     static get allLegers() {}
 
@@ -76,6 +77,7 @@ class LedgerData
         }
         return null;
     }
+
 }
 
 //useful stuff
@@ -191,14 +193,12 @@ function addLedgerEntry_Ext(actor, description)
 
 function getActorLedger_Ext(actor)
 {
+    
     let ledgerForm = new LedgerForm(actor).render(true, {actor});
 }
 
 function clearActorLedger(actor){
-    const lastEntry = LedgerData.getActorLedgerLastEntry(actor)
-    if (lastEntry){
-        remove(lastEntry);
-    }
+    actor.setFlag(Ledger.ID, Ledger.FLAGS.LEDGERS, { [`-=${LedgerData.getActorLedgerLastEntry(actor).id}`]: null });
 
 }
 
@@ -226,6 +226,7 @@ function addLedgerButtons(sheet, jq, data)
     const updateTooltip = 'Add ledger entry';
     const openLedgerTooltip = 'Opens the ledger';
     const descBoxTooltip = 'Add ledger entry';
+    const deleteEntryTooltip = "Deletes ledger entry";
     
     const newRow = document.createElement("flexrow");
     newRow.classList.add("pfledger-spacer");
@@ -240,12 +241,13 @@ function addLedgerButtons(sheet, jq, data)
         if (event.key === "Enter"){
             event.preventDefault();
             updateButton.click();
+            
         }
     })
 
     const updateButton = document.createElement("button");
     updateButton.classList.add("pfledger-button");
-    updateButton.textContent = "Update Ledger";
+    updateButton.textContent = "Add Entry";
     updateButton.title = updateTooltip;
     updateButton.addEventListener("click", event => {
         addLedgerEntry_Ext(actor, descriptionBox.value)
@@ -254,20 +256,25 @@ function addLedgerButtons(sheet, jq, data)
 
     const openLedgerButton = document.createElement("button");
     openLedgerButton.classList.add("pfledger-button");
-    openLedgerButton.textContent = "Open Ledger...";
+    openLedgerButton.textContent = "Open Ledger";
     openLedgerButton.title = openLedgerTooltip;
     openLedgerButton.addEventListener("click", event => {
         getActorLedger_Ext(actor)
     });
     currencyTab.append(openLedgerButton);
 
+    if(game.user.isGM){
     const deleteLedgerButton = document.createElement("button");
     deleteLedgerButton.classList.add("pfledger-button");
-    deleteLedgerButton.textContent = "Delete Ledger";
+    deleteLedgerButton.textContent = "Delete Entry";
+    deleteLedgerButton.title = deleteEntryTooltip;
     deleteLedgerButton.addEventListener("click", event => {
         clearActorLedger(actor);
     });
     currencyTab.append(deleteLedgerButton);
+    }
+
+
 }
 
 Hooks.on('renderActorSheetPF', addLedgerButtons);
@@ -347,3 +354,5 @@ function GMLedgerButton(sheet)
 }
 
 Hooks.on('changeSidebarTab', GMLedgerButton);
+
+
