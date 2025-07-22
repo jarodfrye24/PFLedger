@@ -250,6 +250,7 @@ function addLedgerButtons(sheet, jq, data)
     updateButton.textContent = "Add Entry";
     updateButton.title = updateTooltip;
     updateButton.addEventListener("click", event => {
+        console.log(actor)
         addLedgerEntry_Ext(actor, descriptionBox.value)
     });
     currencyTab.append(updateButton);
@@ -355,4 +356,30 @@ function GMLedgerButton(sheet)
 
 Hooks.on('changeSidebarTab', GMLedgerButton);
 
+//Item Piles Compatibility
 
+function buyfromMerchant(sellerActor, buyerActor, itemPrices,){
+
+    const merchantBuyer = buyerActor;
+    const buyeritemQuantity = itemPrices["buyerReceive"][0].quantity;
+    const buyeritemName = itemPrices['buyerReceive'][0].name;
+    const merchantSeller = sellerActor.name;
+    const pilesDescription = `Purchased ${buyeritemName} x${buyeritemQuantity} from ${merchantSeller}`
+    addLedgerEntry_Ext(merchantBuyer, pilesDescription);
+    
+}
+
+Hooks.on('item-piles-tradeItems', buyfromMerchant)
+
+function selltoMerchant(sellerActor, buyerActor, itemPrices,){
+
+    const merchantBuyer = buyerActor.name;
+    const buyeritemQuantity = itemPrices["buyerReceive"][0].quantity;
+    const buyeritemName = itemPrices['buyerReceive'][0].name;
+    const merchantSeller = sellerActor;
+    const pilesDescription = `Sold ${buyeritemName} x${buyeritemQuantity} to ${merchantBuyer}`
+    addLedgerEntry_Ext(merchantSeller, pilesDescription);
+    
+}
+
+Hooks.on('item-piles-tradeItems', selltoMerchant)
