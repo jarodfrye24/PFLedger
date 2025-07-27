@@ -369,7 +369,7 @@ function buyfromMerchant(sellerActor, buyerActor, itemPrices,){
     
 }
 
-Hooks.on('item-piles-tradeItems', buyfromMerchant)
+Hooks.on('item-piles-tradeItems', buyfromMerchant);
 
 function selltoMerchant(sellerActor, buyerActor, itemPrices,){
 
@@ -382,4 +382,26 @@ function selltoMerchant(sellerActor, buyerActor, itemPrices,){
     
 }
 
-Hooks.on('item-piles-tradeItems', selltoMerchant)
+Hooks.on('item-piles-tradeItems', selltoMerchant);
+
+function testPiles(sourceActor, targetActor){
+
+    const itemPile = sourceActor.name
+    const currentActor = targetActor
+    const pilesDescription = `Obtained from ${itemPile}`
+    addLedgerEntry_Ext(currentActor, pilesDescription)
+}
+
+Hooks.on('item-piles-transferAttributes', testPiles)
+
+function tradePiles(tradeStarter, leftTrader, rightTrader, tradeId, privateTrade){
+    const leftActor = fromUuidSync(leftTrader.actor)
+    const rightActor = fromUuidSync(rightTrader.actor)
+    const leftTradeDescription = `Trade with ${rightActor.name}`
+    const rightTradeDescription = `Trade with ${leftActor.name}`
+    addLedgerEntry_Ext(leftActor, leftTradeDescription)
+    addLedgerEntry_Ext(rightActor, rightTradeDescription)
+    
+}
+
+Hooks.on('item-piles-tradeComplete', tradePiles)
