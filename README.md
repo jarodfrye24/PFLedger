@@ -1,5 +1,7 @@
 Forked and updated version of the PF Ledger Module.
 
+https://github.com/jarodfrye24/PFLedger/releases/download/1.2/module.json
+
 # PFLedger
 A ledger system for Pathfinder games!
 
