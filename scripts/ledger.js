@@ -358,27 +358,39 @@ Hooks.on('changeSidebarTab', GMLedgerButton);
 
 //Item Piles Compatibility
 
-function buyfromMerchant(sellerActor, buyerActor, itemPrices,){
+function buyfromMerchant(sellingUuid, buyerUuid, itemPrices, userId, interactionId,){
+    if (userId !=game.user.id){
+        return;
+    }
+    else {
 
-    const merchantBuyer = buyerActor;
+    const merchantBuyer = buyerUuid;
     const buyeritemQuantity = itemPrices["buyerReceive"][0].quantity;
     const buyeritemName = itemPrices['buyerReceive'][0].name;
-    const merchantSeller = sellerActor.name;
+    const merchantSeller = sellingUuid.name;
     const pilesDescription = `Purchased ${buyeritemName} x${buyeritemQuantity} from ${merchantSeller}`
     addLedgerEntry_Ext(merchantBuyer, pilesDescription);
+
+    }
     
 }
 
 Hooks.on('item-piles-tradeItems', buyfromMerchant);
 
-function selltoMerchant(sellerActor, buyerActor, itemPrices,){
+function selltoMerchant(sellingUuid, buyerUuid, itemPrices, userId, interactionId){
+    if (userId !=game.user.id){
+    return;
+    }
+    else {
 
-    const merchantBuyer = buyerActor.name;
+    const merchantBuyer = buyerUuid.name;
     const buyeritemQuantity = itemPrices["buyerReceive"][0].quantity;
     const buyeritemName = itemPrices['buyerReceive'][0].name;
-    const merchantSeller = sellerActor;
+    const merchantSeller = sellingUuid;
     const pilesDescription = `Sold ${buyeritemName} x${buyeritemQuantity} to ${merchantBuyer}`
     addLedgerEntry_Ext(merchantSeller, pilesDescription);
+
+    }
     
 }
 

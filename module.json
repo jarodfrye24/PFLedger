@@ -1,8 +1,8 @@
 {
   "id": "PFLedger",
   "title": "Pathfinder Ledger",
-  "description": "Test Update for Pathfinder Ledger",
-  "version": "1.0.08",
+  "description": "a Ledger for the Foundry Pathfinder 1E System",
+  "version": "1.2",
   "library": "false",
   "compatibility": {
     "minimum": 12,
