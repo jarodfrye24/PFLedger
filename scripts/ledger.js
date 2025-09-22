@@ -339,7 +339,7 @@ function GMLedgerButton(sheet)
     const openLedgerTooltip = 'Opens the combined player ledgers';
     const ledgerButtonContents = 'Open Ledgers...';
 
-    const pfDetailsTab = sheet.element[0].querySelector('#pf1-details');
+    const pfDetailsTab = document.getElementById("pf1-details");
     if(!pfDetailsTab || pfDetailsTab.querySelector('#PathfinderGMLedgerButton'))
     {
         return;
