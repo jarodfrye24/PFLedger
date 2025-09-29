@@ -130,31 +130,36 @@ class CashConverter
     }
 }
 
-//the ledger form
-class LedgerForm extends FormApplication
-{
-    static get defaultOptions()
-    {
-        const defaults = super.defaultOptions;
-      
-        const overrides =
-        {
-          height: '700',
-          width: '650',
-          id: 'ledger',
-          template: Ledger.TEMPLATES.LEDGERLIST,
-          title: 'Ledger',
-          currencies: ['cp', 'sp', 'gp', 'pp'],
-        };
-      
-        const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
-        
-        return mergedOptions;
-    }
 
-    getData(options)
+//the ledger form
+
+const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
+
+class LedgerForm extends HandlebarsApplicationMixin(ApplicationV2){
+    static DEFAULT_OPTIONS = {
+        classes: ["themed", "theme-light"],
+        id: "ledger",
+        window: {
+            title: "Ledger",
+            resizable: true,
+        },
+        position: {
+            width: 700,
+            height: 500,
+        },
+    
+    };
+
+    static PARTS = {
+        form: {
+            template: Ledger.TEMPLATES.LEDGERLIST,
+            scrollable: [""],
+        },
+    };
+
+    _prepareContext(options)
     {
-        let outLedgers = {ledgers: LedgerData.getLedgerForActor(this.object)};
+        let outLedgers = {ledgers: LedgerData.getLedgerForActor(this.options.actor)};
         return outLedgers;
     }
 }
@@ -194,7 +199,7 @@ function addLedgerEntry_Ext(actor, description)
 function getActorLedger_Ext(actor)
 {
     
-    let ledgerForm = new LedgerForm(actor).render(true, {actor});
+    let ledgerForm = new LedgerForm({actor}).render(true, {actor});
 }
 
 function clearActorLedger(actor){
@@ -282,46 +287,48 @@ Hooks.on('renderActorSheetPF', addLedgerButtons);
 
 
 //GM ledger forms.
-class ledgerFormGM extends FormApplication
-{
-    static get defaultOptions()
-    {
-        const defaults = super.defaultOptions;
-      
-        const overrides =
-        {
-          height: '700',
-          width: '650',
-          id: 'ledger',
-          template: Ledger.TEMPLATES.LEDGERLIST,
-          title: 'Ledger',
-          currencies: ['cp', 'sp', 'gp', 'pp'],
-        };
-      
-        const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
-        
-        return mergedOptions;
-    }
+class ledgerFormGM extends HandlebarsApplicationMixin(ApplicationV2) {
+  static DEFAULT_OPTIONS = {
+    classes: ["themed", "theme-light"],
+    window: {
+        title: "GM Ledger",
+        resizable: true,
+    },
+    actions: {
+      changeActor: this.changeActor,
+    },
+  }
 
-    getData(options)
-    {  
-        let allLedgers;
-        game.actors.forEach(actor =>{
-            const currentLedgers = LedgerData.getLedgerForActor(actor);
-            if(currentLedgers)
-            {
-                if(!allLedgers)
-                {
-                    allLedgers = currentLedgers;
-                }
-                else
-                {
-                    allLedgers = {...allLedgers, ...currentLedgers};
-                }
-            }
-        });
-        return {ledgers: allLedgers};
-    }
+  static PARTS = {
+    header: {
+      template: "modules/PFLedger/templates/tabs.hbs",
+    },
+    content: {
+      template: Ledger.TEMPLATES.LEDGERLIST,
+      scrollable: [".scrollable"]
+    },
+  };
+
+  currentActor;
+
+async _prepareContext(options) {
+  const actors = game.actors.filter(a => a.type === 'character');
+  this.currentActor ??= actors[0]
+  let ledgers =  this.currentActor ? LedgerData.getLedgerForActor(this.currentActor) : {};
+  console.log(this.currentActor)
+
+  return {
+    currentActor: this.currentActor,
+    ledgers,
+    actors, 
+  };
+}
+
+  static async changeActor(event, target) {
+    const actorId = target.dataset.actorId;
+    this.currentActor = game.actors.get(actorId);
+    this.render();
+  }
 }
 
 function getGMLedger_Ext()

@@ -1,0 +1,7 @@
+<div class="separator">
+  <div class="button-panel flexrow">
+    {{#each actors as |actor|}}
+      <a data-action="changeActor" data-actor-id="{{actor.id}}">{{actor.name}}</a>
+    {{/each}}
+  </div>
+</div>

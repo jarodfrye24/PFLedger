@@ -9,10 +9,19 @@
   padding: 4px;
 }
 
+.pfledger{ overflow-y: auto;
+}
+
 .pfledger-th{
   font-style: normal;
-  font-size: 10px
+  font-size: var(--font-size-13);
+  color: #f0f0e0;
+  text-shadow: 1px 1px var(--color-shadow-dark);
+  background-color: var(--pf1-bg-dark-3);
+  text-align: center;
 }
+
+
 
 .pfledger-desc-box
 {
@@ -42,4 +51,8 @@
 {
   margin: 0 8px;
   flex: 0 0 20px;
+}
+
+.separator {
+border-bottom: var(--pf1-border-groove)
 }
